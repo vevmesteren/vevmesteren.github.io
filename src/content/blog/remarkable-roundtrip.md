@@ -1,10 +1,10 @@
 ---
 title: 'Remarkable Roundtrip: Publishing Obsidian to E-Ink and Pulling Handwriting Back'
-description: 'The only open-source tool that does the full round-trip: publish Obsidian markdown to reMarkable as PDF, annotate by hand, and pull handwriting back into your vault as structured text via vision LLM. How it was built and why every existing tool only goes one way.'
-pubDate: '2026-11-15'
-tags: ['remarkable', 'obsidian', 'python', 'ai']
+description: 'The only open-source tool that does the full round-trip: publish Obsidian to reMarkable as PDF, annotate by hand, pull handwriting back into your vault as text via vision LLM.'
+date: 2026-11-15
+tags: [remarkable, obsidian, python, ai]
+ai: { tldr: true, askAuthor: true, translate: true, quiz: false, readNext: true }
 ---
-
 I use a reMarkable Paper Pro as my daily driver. I also use Obsidian for my knowledge base. The workflow I wanted was simple: publish a markdown document from Obsidian to the reMarkable, read it on e-ink, annotate by hand, then pull those handwritten annotations back into Obsidian as editable text.
 
 No existing tool does this.
@@ -29,12 +29,12 @@ That distinction matters. This wasn't a from-scratch build — it was taking cod
 
 ```mermaid
 graph TB
-    User["📝 Obsidian User<br/>(Mac/Win/Linux)"]
-    CLI["🔧 ormb CLI<br/>(Python package)"]
-    RM["📟 reMarkable Tablet"]
-    Cloud["☁️ reMarkable Cloud API"]
+    User["Obsidian User<br/>(Mac/Win/Linux)"]
+    CLI["ormb CLI<br/>(Python package)"]
+    RM["reMarkable Tablet"]
+    Cloud["reMarkable Cloud API"]
     Vision["Vision LLM<br/>(GLM-4.5V)"]
-    Vault["📚 Obsidian Vault"]
+    Vault["Obsidian Vault"]
 
     User -->|"ormb publish"| CLI
     CLI -->|"HTML → PDF"| CLI

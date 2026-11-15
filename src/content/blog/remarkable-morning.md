@@ -1,10 +1,10 @@
 ---
 title: 'Remarkable Morning: A Daily News Digest Pipeline for E-Ink'
-description: 'How I built a Python pipeline that fetches 19 news sources across 3 languages, curates via LLM, assembles an EPUB, and uploads it to my reMarkable Paper Pro every morning at 5:30 — all for under $0.05 per run.'
-pubDate: '2026-11-15'
-tags: ['remarkable', 'python', 'pipeline', 'ai']
+description: 'A Python pipeline that fetches 19 news sources across 3 languages, curates via LLM, assembles an EPUB, and uploads to my reMarkable every morning — for under $0.05 per run.'
+date: 2026-11-15
+tags: [remarkable, python, pipeline, ai]
+ai: { tldr: true, askAuthor: true, translate: true, quiz: false, readNext: true }
 ---
-
 Every morning, I would open my laptop and check the news. The Guardian, BBC, CBC, Der Spiegel, Le Figaro — I'd bounce between sites across three languages, skim headlines, open tabs, and try to get a sense of what mattered before my coffee got cold. It was inconsistent, time-consuming, and the reading experience on a screen was worse than what I had on my desk: a reMarkable Paper Pro.
 
 The reMarkable was paired and ready. It had no built-in news pipeline. So I built one.

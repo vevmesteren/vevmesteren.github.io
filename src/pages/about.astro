@@ -1,111 +1,44 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
-import Header from '../components/Header.astro';
+import Base from '../layouts/Base.astro';
+import { site } from '../config';
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead
-			title="About — Valentin Backofen"
-			description="German, Norwegian, Canadian, in that order. Father of four. Montrealer since 2001. Technology leader at the intersection of AI strategy, agentic products, and banking architecture."
-		/>
-	</head>
-	<body>
-		<Header />
-		<main>
-			<h1>About</h1>
+<Base title="About" narrow>
+	<h1 class="page-title">About</h1>
+	<article class="prose">
+		<blockquote>
+			<p>"Always code as if the guy who ends up maintaining your code will be a violent psychopath who knows where you live."</p>
+			<footer>— John Woods</footer>
+		</blockquote>
 
-			<blockquote>
-				<p>
-					"Always code as if the guy who ends up maintaining your code will be a violent
-					psychopath who knows where you live."
-				</p>
-				<footer>— John Woods</footer>
-			</blockquote>
+		<p>I wanted to become an actor and a historian. Then the web happened to me in 1998.</p>
 
-			<p>
-				I wanted to become an actor and a historian. Then the web happened to me in 1998.
-			</p>
+		<p>German, Norwegian, Canadian, in that order. Father of four. Montrealer since 2001.</p>
 
-			<p>
-				German, Norwegian, Canadian, in that order. Father of four. Montrealer since 2001.
-			</p>
+		<p>Professionally, I've bounced around enough to make categorizing me slightly inconvenient.</p>
 
-			<p>
-				Professionally, I've bounced around enough to make categorizing me slightly
-				inconvenient.
-			</p>
+		<p>I spent about a decade in advertising, building digital experiences for Toyota, IKEA, Air Canada, L'Oréal and Rogers at McCann, Ogilvy and Pheromone. Then I co-founded Qi Sports and spent four years as CEO, experiencing the startup circus from the inside.</p>
 
-			<p>
-				I spent about a decade in advertising, building digital experiences for Toyota, IKEA,
-				Air Canada, L'Oréal and Rogers at McCann, Ogilvy and Pheromone. Then I co-founded Qi
-				Sports and spent four years as CEO, experiencing the startup circus from the inside.
-			</p>
+		<p>Eventually, I went back to my technological roots, helped build the Digital Factory at BRP, and joined National Bank of Canada in 2021.</p>
 
-			<p>
-				Eventually, I went back to my technological roots, helped build the Digital Factory at
-				BRP, and joined National Bank of Canada in 2021.
-			</p>
+		<p>Along the way, I've shipped code, built products, built teams, run a company, worked agency-side and client-side, and accumulated a reasonably well-tuned BS detector. My strength has always been cutting through technical jargon to get to what actually matters.</p>
 
-			<p>
-				Along the way, I've shipped code, built products, built teams, run a company, worked
-				agency-side and client-side, and accumulated a reasonably well-tuned BS detector. My
-				strength has always been cutting through technical jargon to get to what actually
-				matters.
-			</p>
+		<p>Today, I spend much of my time thinking about what happens when AI stops being something people use and starts becoming something that acts.</p>
 
-			<p>
-				Today, I spend much of my time thinking about what happens when AI stops being
-				something people use and starts becoming something that acts.
-			</p>
+		<p>At National Bank, my work sits across AI strategy and governance, the Product Development Life Cycle, our Enterprise Agent Harness, and agentic customer products. The technology matters, obviously. But I'm much more interested in the business question behind it: <em>What does a 165-year-old bank need to become when AI agents start acting as economic participants alongside humans?</em></p>
 
-			<p>
-				At National Bank, my work sits across AI strategy and governance, the Product
-				Development Life Cycle, our Enterprise Agent Harness, and agentic customer products.
-				The technology matters, obviously. But I'm much more interested in the business
-				question behind it: <em>What does a 165-year-old bank need to become when AI agents
-				start acting as economic participants alongside humans?</em>
-			</p>
+		<p>That question quickly goes beyond AI or software development. It touches products, channels, customer relationships, identity, trust, consent, transactions, and ultimately the role a bank plays when the customer may no longer be the one directly operating the interface.</p>
 
-			<p>
-				That question quickly goes beyond AI or software development. It touches products,
-				channels, customer relationships, identity, trust, consent, transactions, and
-				ultimately the role a bank plays when the customer may no longer be the one directly
-				operating the interface.
-			</p>
+		<p>I'm also actively building with autonomous AI agents and experimenting at the frontier of agentic coding. Reading about this stuff isn't enough. Building exposes very quickly what is real, what is promising, and what is still mostly PowerPoint.</p>
 
-			<p>
-				I'm also actively building with autonomous AI agents and experimenting at the frontier
-				of agentic coding. Reading about this stuff isn't enough. Building exposes very
-				quickly what is real, what is promising, and what is still mostly PowerPoint.
-			</p>
+		<p>That probably summarizes my general philosophy pretty well.</p>
 
-			<p>
-				That probably summarizes my general philosophy pretty well.
-			</p>
+		<p>Technology without customer value is just technology. Business value without architecture and technological grounding is just PowerPoint. One widens the gap between IT and Business; the other fills that gap with meetings. Neither gets us very far. The real work is bringing both together, and in a field moving this quickly, anyone confidently telling you "this is the way" is probably overselling.</p>
 
-			<p>
-				Technology without customer value is just technology. Business value without
-				architecture and technological grounding is just PowerPoint. One widens the gap
-				between IT and Business; the other fills that gap with meetings. Neither gets us very
-				far. The real work is bringing both together, and in a field moving this quickly,
-				anyone confidently telling you "this is the way" is probably overselling.
-			</p>
+		<p>My biggest mistakes are the ones I never made.</p>
 
-			<p>
-				My biggest mistakes are the ones I never made.
-			</p>
+		<hr />
 
-			<hr />
-
-			<p>
-				You can find me on
-				<a href="https://github.com/vevmesteren">GitHub</a> and
-				<a href="https://www.linkedin.com/in/valentinbackofen/">LinkedIn</a>.
-			</p>
-		</main>
-		<Footer />
-	</body>
-</html>
+		<p>Find me on <a href={site.author.links.github}>GitHub</a> and <a href={site.author.links.linkedin}>LinkedIn</a>.</p>
+	</article>
+</Base>
