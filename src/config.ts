@@ -1,6 +1,6 @@
 // Everything the AI features need to know about this site lives here. Change it, not the components.
 export const site = {
-	name: 'Valentin Backofen',
+	name: 'vevmesteren',
 	tagline: 'What does a bank become when AI agents start acting?',
 	scene: 'Agentic banking, software craftsmanship, and radar findings.',
 	description:
