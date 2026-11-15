@@ -1,6 +1,8 @@
 // Everything the AI features need to know about this site lives here. Change it, not the components.
 export const site = {
-	name: 'vevmesteren',
+	name: '<vevmesteren/>',
+	// Plain name for <title>, OG tags, RSS — no angle brackets in metadata.
+	shortName: 'vevmesteren',
 	tagline: 'What does a bank become when AI agents start acting?',
 	scene: 'Agentic banking, software craftsmanship, and radar findings.',
 	description:

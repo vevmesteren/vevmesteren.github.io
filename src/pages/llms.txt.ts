@@ -8,7 +8,7 @@ export async function GET(context: APIContext) {
 	const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 	const origin = context.site!.origin;
 	const lines = [
-		`# ${site.name}`,
+		`# ${site.shortName}`,
 		'',
 		`> ${site.description}`,
 		'',

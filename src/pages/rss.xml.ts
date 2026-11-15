@@ -7,7 +7,7 @@ export async function GET(context: APIContext) {
 	const posts = await getPosts();
 	const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 	return rss({
-		title: site.name,
+		title: site.shortName,
 		description: site.description,
 		site: context.site!,
 		items: posts.map((p) => ({ title: p.data.title, description: p.data.description, pubDate: p.data.date, link: `${base}/blog/${p.id}/` })),
