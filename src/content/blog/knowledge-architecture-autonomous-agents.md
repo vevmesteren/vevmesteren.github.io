@@ -161,7 +161,7 @@ The data stores map to the knowledge lifecycle:
 - **Knowledge Graph** extracts relationships from wikilinks. It's the structural index — not just what knowledge exists, but how it connects.
 - **Search Index** is the retrieval index. Full-text and semantic embeddings. This is what agents query at runtime.
 - **Agent Briefings** are the output of synthesis — pre-digested, compressed context ready for injection into an agent's working context.
-- **Decision Traces** capture causal lineage: what was decided, why, and what followed. The system has 24,825 traces across 603 sessions.
+- **Decision Traces** capture causal lineage: what was decided, why, and what followed. The system has 25,517 traces across 603 sessions.
 - **Confidence Ledger** holds Bayesian confidence scores per knowledge entry. 9,018 entries scored. This is what separates "well-established" from "speculative."
 - **Memory Lifecycle Store** tracks staleness and decay. Knowledge has a shelf life; this store enforces it.
 
@@ -308,7 +308,7 @@ KM is the only stream that every other stream reads from. It's also the only str
 
 ## What Works, What Doesn't
 
-I designed this system. I operate it daily. Here's an honest inventory.
+I designed this system. I operate it daily. Here's an honest inventory — updated after a round of remediation work that closed most of the dormant gaps.
 
 ### What's Live and Operational
 
@@ -316,40 +316,74 @@ I designed this system. I operate it daily. Here's an honest inventory.
 
 **Curation and taxonomy restructuring** (C19, C21) works. I've restructured the taxonomy multiple times as the domain evolved. The split-vs-prune method is proven.
 
-**Decision traces and confidence scoring** (C45, C46, C47) works. 24,825 traces across 603 sessions. 9,018 confidence-scored entries. The causal lineage is queryable and the confidence scores feed into briefings.
+**Decision traces and confidence scoring** (C45, C46, C47) works. 25,517 traces across 603 sessions. 9,018 confidence-scored entries. The causal lineage is queryable and the confidence scores feed into briefings.
 
-### What's Built but Dormant
+**Wiki observation** (C22) is now live. The observer cron was dead for months — it died silently and I didn't notice. That's been fixed: retry logic handles transient git failures, malformed YAML falls back gracefully, and the observer now runs reliably. The inbound flow — shared → local adaptation — works again.
 
-**Wiki observation** (C22) is built but the observer cron is dead. It hasn't run since August. This means the inbound flow — shared → local adaptation — is broken. Agents don't automatically learn when the shared knowledge base changes. I manually pull updates when I notice them. This is a known gap and it's next on the fix list.
+**Hybrid search and retrieval** (C49) is now live. The search index was stale and tests were failing. A rebuild process now generates semantic embeddings incrementally — 633 embeddings covering the knowledge base, backed by a knowledge graph of 635 nodes and 2,685 edges. Agents can query and get complete results.
 
-**Hybrid search and retrieval** (C49) is built but has no live rebuild process. The search index exists but isn't kept fresh. Tests are failing. Agents can query, but the results are incomplete.
+**Agent briefings** (C51) is now wired into dispatch. This was the most frustrating gap for months — the capability produced 97.79% context reduction but no agent consumed the briefings. That's been fixed. Briefings are now injected at dispatch time, automatically, for every kanban card an agent picks up. The system has produced briefings that reduce context by 15.7% on live tasks — not the full 97.79% because the briefings are now scoped to the task, not the entire knowledge base, but the reduction is real and compounds across every dispatch.
 
-**Agent briefings** (C51) is the most frustrating gap. The capability works — it produces 97.79% context reduction — but no agent consumes the briefings. Two briefings have ever been produced. The compression is proven; the consumption is not wired. This is the single biggest leverage point in the domain: if I wire briefings into agent dispatch, every agent gets pre-digested, confidence-weighted context for free.
+**Memory lifecycle and decay** (C50) is now deployed. The decay engine uses type-aware half-lives — 90 days for facts, 30 days for beliefs, 7 days for experiences — modulated by an activity factor that slows decay when knowledge is actively used. Today, 78% of entries are stale. That's not a failure; it's the system working as designed. Experiences decay fast — they should. The 22% that's non-stale is the knowledge that's actively referenced.
 
-**Memory lifecycle and decay** (C50) is built but all entries are stale. The decay process isn't running. Knowledge doesn't expire because nothing enforces expiration.
+**Content boundary enforcement** (C42) is now enforced. The boundary was advisory for months — three fail-open points meant knowledge could leak between tiers. A three-tier validation model now runs as part of the lint pipeline: proposed (pre-write), active (post-write), and consumption (at injection time). The validator has 17 tests, all passing. Over 3,000 violations have been logged — mostly missing metadata, not content leaks — and the enforcement is log-only for now, tightening to hard-block as the backlog clears.
 
-**Cross-agent memory sharing** (C52) is built but the shared store has zero entries. The capability exists; the population doesn't.
+### What's Designed but Not Yet Built
 
-**Content boundary enforcement** (C42) is built but the enforcement chain has fail-open points. The boundary is more advisory than enforced. In practice, I rely on convention and review rather than automated gating.
+**Cross-agent memory sharing** (C52) is the remaining frontier. The shared store exists — two test entries, zero production traffic. The capability is architecturally sound but the population is empty because the design wasn't ready. It is now. An architectural review (ARB) just completed a five-stage pipeline — three model families, adversarial review, and ratification — producing a target-state architecture that I'll describe in the next section.
 
 ### The Single-Operator Trust Model
 
 This system runs with a single operator — me. I set policy, approve contributions, and escalate gaps. That works at this scale because I'm in the loop on every meaningful decision. The trust model is: the human is the final gate.
 
-At enterprise scale, this breaks. A single operator can't review every contribution. The boundary enforcement can't be advisory — it has to be automated and non-bypassable. The confidence scoring needs to drive automated routing, not just briefing priority. The decay process needs to run continuously, not when I remember to trigger it.
+At enterprise scale, this breaks. A single operator can't review every contribution. The boundary enforcement can't be advisory — it has to be automated and non-bypassable. The confidence scoring needs to drive automated routing, not just briefing priority. The decay process needs to run continuously, not when I remember to trigger it. The cross-agent sharing design addresses this directly — but it's not built yet.
 
 ### What I'd Do Differently
 
-Three things, in order of regret:
+Two things remain, in order of regret:
 
-1. **Wire briefings into dispatch from day one.** I built the briefing compiler (C51) late, after agents were already running without it. The result is months of agents operating without pre-digested context. The 97.79% compression was proven but never consumed. If I were starting over, briefings would be the first capability, not the last.
+1. **Enforce the boundary at the code level, not the convention level.** The content boundary (C42) is now enforced via lint, but the DB path — direct writes to the shared store — still relies on convention. The boundary needs to be a hard gate on every write, not just on the wiki contribution path. The ARB addresses this with a write broker that is the sole writer, with cryptographic signatures per profile.
 
-2. **Make the observer cron self-healing.** The wiki observer (C22) died silently and I didn't notice for weeks. A cron that can die without alerting is worse than no cron — it creates false confidence. I'd build heartbeat monitoring into every background process from the start.
+2. **Build the sharing mechanism before you need it.** The shared store has been empty for months because I deferred the design. When two profiles needed to share knowledge, I manually copied context. That doesn't scale. The sharing design should have been ready before the second profile went live.
 
-3. **Enforce the boundary at the code level, not the convention level.** The content boundary (C42) is enforced by convention — agents are *supposed* to respect the instance/local/common distinction. In practice, the fail-open chain means knowledge leaks. At this scale, I catch it in review. At scale, I wouldn't. The boundary needs to be a hard gate, not a soft recommendation.
+The first regret from the earlier version — wire briefings into dispatch — is resolved. The second — make the observer self-healing — is resolved. Progress.
+
+---
+
+## What's Next: Cross-Agent Memory Sharing
+
+The ARB just produced a target-state architecture for the last dormant capability: cross-agent memory sharing (C52). Here's what it proposes, in business terms.
+
+### The Problem
+
+Today, each agent profile is an island. When one profile learns a lesson — "this deployment pattern fails under these conditions," "this library has a memory leak at scale," "this configuration works" — that lesson stays local. Another profile working on a similar problem starts from scratch. The system doesn't compound knowledge across projects. It accumulates it in silos.
+
+This is the difference between a shared database and a learning system. A shared database lets you query what someone else wrote. A learning system knows what knowledge is relevant to your task, delivers it at the right moment, measures whether it helped, and uses that signal to improve future delivery.
+
+### What the ARB Proposes
+
+**Knowledge with a scope.** Not all knowledge should reach all agents. A lesson about one project's deployment config is project-scoped — only agents working on that project need it. A pattern that appears across three projects is cross-project — agents on any of those projects should see it. A governance decision about the platform itself is platform-scoped — every agent needs it. The ARB defines a four-level scope taxonomy — platform, cross-project, project, profile-specific — with automatic routing rules that send knowledge to the right audience without human triage.
+
+**Knowledge with a trust lifecycle.** Knowledge enters the shared store as *proposed*, not active. A different agent profile than the one that wrote it must ratify it before it becomes active and injectable into briefings. This preserves the producer≠verifier principle: the agent that discovered the knowledge is not the agent that validates it. Platform-scoped knowledge — the widest blast radius — carries the highest evidence bar and requires cross-profile ratification. Project-scoped knowledge auto-promotes with a lower bar because the blast radius is contained.
+
+**Knowledge that helps, measured.** The system records whether a shared knowledge card actually improved the task it was injected into. When an agent completes a task, the outcome — success, failure, partial — is linked back to every shared card that was injected into its briefing. Over time, this builds an outcome-attributed authority score: not "how often was this knowledge injected" (a popularity metric), but "how often did this knowledge correlate with success" (a quality metric). Knowledge that doesn't help decays faster. Knowledge that does help gets higher priority in future briefings. This is the RSI loop — recursive self-improvement through knowledge compounding.
+
+**Knowledge that degrades gracefully.** Shared knowledge decays at one-third the rate of local knowledge — it's more durable because it's been ratified. But it still decays. When a platform version changes, knowledge tied to the old version is automatically deprecated with a tombstone that propagates to consumers. When a shared card is revoked — because the session that produced it was compromised, or because later evidence superseded it — it's withdrawn from future injections and every profile that consumed it gets a revocation notice.
+
+**Knowledge that compounds into patterns.** A weekly synthesis job clusters related knowledge cards — "three projects each hit the same proxy configuration failure" — and synthesizes them into a pattern card. Patterns that accumulate enough cross-profile evidence graduate to the canonical knowledge base — the shared wiki — through the normal PR-gated contribution workflow. This is where specific lessons become general principles. It's the difference between "this broke on project X" and "remote workers need an explicit environment contract."
+
+**Knowledge that's safe to share.** Every shared card is validated before it enters the store: schema conformance, secret and credential scanning, PII screening, and prompt-injection detection. Content is rendered to consuming agents as attributed observation — "Profile X observed that Y happens under Z conditions" — never as imperative instructions. A card written by a compromised agent cannot instruct another agent to do something harmful.
+
+### The Commitment
+
+This is a significant build. Five phases, each with a build→install→operationalize cycle. New capabilities (a shared-card validator, a write broker, a synthesis engine). A schema migration from the current 9-column shared store to a 40-column lifecycle-aware schema with six join tables. Cross-profile ratification infrastructure. Outcome attribution wired into decision traces. A weekly synthesis job.
+
+The architecture is ratified. The design is honest about its gaps — 15 unresolved items, three of which need my decision before implementation starts. The RSI loop is real, not aspirational: the data path from task outcome through confidence update to pattern synthesis to canonical graduation is specified, not hand-waved.
+
+The question now is sequencing. This is platform work — it touches every profile, every project, every dispatch. It's the kind of change you want to get right before you scale, not after. The dormant capabilities that preceded it (observer, search, briefings, decay, boundary) are all live now. The foundation is built. The last piece is the one that makes the foundation compound.
 
 ---
 
 Knowledge management for autonomous agents isn't a wiki. It's a system with a domain model, a value stream, data stores, and honest gaps. The architecture works when it's honest about what it knows and what it doesn't — when confidence scores are real, when decay is enforced, and when briefings actually reach the agents that need them.
 
-I'm not there yet. But the architecture is sound, the gaps are known, and the next step is clear: wire the briefings, fix the observer, and let the system start managing its own knowledge instead of waiting for me to do it.
+The foundation is built. The dormant capabilities are live. The last gap — cross-agent memory sharing — has a ratified design. The next step is to build it.
