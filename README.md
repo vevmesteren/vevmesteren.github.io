@@ -1,63 +1,70 @@
-# Astro Starter Kit: Blog
+# vevmesteren.com
+
+Personal blog of Valentin Backofen — radar findings, project announcements, and thoughts on agentic
+banking, software craftsmanship, and building things that last.
+
+Built with [Astro](https://astro.build), hosted on GitHub Pages, served from `vevmesteren.com`.
+
+## Quick start
 
 ```sh
-npm create astro@latest -- --template blog
+npm install      # install dependencies
+npm run dev      # local dev server at localhost:4321
+npm run build    # build to ./dist/
+npm run preview  # preview the production build locally
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Writing a post
 
-Features:
+Create a new `.md` file in `src/content/blog/`:
 
-- ✅ Minimal styling (make it your own!)
-- ✅ 100/100 Lighthouse performance
-- ✅ SEO-friendly with canonical URLs and Open Graph data
-- ✅ Sitemap support
-- ✅ RSS Feed support
-- ✅ Markdown & MDX support
+```yaml
+---
+title: 'Your post title'
+description: 'One-line summary for SEO and post listings'
+pubDate: '2026-01-15'
+tags: ['radar', 'banking']
+# draft: true   # uncomment to hide from the site
+---
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-├── public/
-├── src/
-│   ├── assets/
-│   ├── components/
-│   ├── content/
-│   ├── layouts/
-│   └── pages/
-├── astro.config.mjs
-├── README.md
-├── package.json
-└── tsconfig.json
+Your content here, in Markdown.
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+The post appears on the homepage (latest 3), the blog index, and the RSS feed automatically. Drafts
+are excluded from all listings and feeds but still type-checked.
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## Project structure
 
-The `src/content/` directory contains "collections" of related Markdown and MDX documents. Use `getCollection()` to retrieve posts from `src/content/blog/`, and type-check your frontmatter using an optional schema. See [Astro's Content Collections docs](https://docs.astro.build/en/guides/content-collections/) to learn more.
+```
+src/
+├── components/     # Header, Footer, BaseHead, FormattedDate
+├── content/blog/   # blog posts (Markdown/MDX)
+├── layouts/        # BlogPost layout
+├── pages/          # index (home), about, blog/[...slug], rss.xml
+├── styles/         # global.css
+└── consts.ts       # site title + description
+public/
+├── CNAME           # custom domain: vevmesteren.com
+└── favicon.svg
+.github/workflows/
+└── deploy.yml      # build + deploy on push to main
+```
 
-Any static assets, like images, can be placed in the `public/` directory.
+## Deployment
 
-## 🧞 Commands
+Pushing to `main` triggers the GitHub Actions workflow (`.github/workflows/deploy.yml`) which builds
+the site and deploys to GitHub Pages. No manual steps needed.
 
-All commands are run from the root of the project, from a terminal:
+## Custom domain
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+`vevmesteren.com` is configured via `public/CNAME`. DNS records need to be set with the domain
+registrar:
 
-## 👀 Want to learn more?
+- **A records** pointing to GitHub Pages IPs:
+  - `185.199.108.153`
+  - `185.199.109.153`
+  - `185.199.110.153`
+  - `185.199.111.153`
+- **CNAME** for `www.vevmesteren.com` → `vevmesteren.github.io`
 
-Check out [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
-
-## Credit
-
-This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).
+GitHub Pages settings (repo → Settings → Pages) should be set to deploy from "GitHub Actions."

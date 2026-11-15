@@ -7,15 +7,15 @@ import FormattedDate from '../../components/FormattedDate.astro';
 import Header from '../../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
 
-const posts = (await getCollection('blog')).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+const posts = (await getCollection('blog'))
+	.filter((post) => !post.data.draft)
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<BaseHead title={`Blog — ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
 		<style>
 			main {
 				width: 960px;
@@ -62,6 +62,19 @@ const posts = (await getCollection('blog')).sort(
 				margin: 0;
 				color: rgb(var(--gray));
 			}
+			.tags {
+				margin: 0.5em 0 0 0;
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.4em;
+			}
+			.tag {
+				font-size: 0.75em;
+				color: rgb(var(--gray));
+				background: rgb(var(--gray-light));
+				padding: 0.15em 0.6em;
+				border-radius: 3px;
+			}
 			ul li a:hover h4,
 			ul li a:hover .date {
 				color: rgb(var(--accent));
@@ -101,6 +114,13 @@ const posts = (await getCollection('blog')).sort(
 								<p class="date">
 									<FormattedDate date={post.data.pubDate} />
 								</p>
+								{post.data.tags.length > 0 && (
+									<div class="tags">
+										{post.data.tags.map((tag) => (
+											<span class="tag">#{tag}</span>
+										))}
+									</div>
+								)}
 							</a>
 						</li>
 					))}
