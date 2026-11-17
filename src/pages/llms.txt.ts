@@ -1,12 +1,12 @@
 import type { APIContext } from 'astro';
 import { site } from '../config';
-import { getPosts } from '../lib/posts';
+import { getAllItems } from '../lib/posts';
 
-// Index of the site for AI tools and for the site's own "Ask the blog" fallback and "Read next".
 export async function GET(context: APIContext) {
-	const posts = await getPosts();
+	const items = await getAllItems();
 	const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 	const origin = context.site!.origin;
+	const label = (t: string) => t === 'radar' ? 'Radar' : t === 'workshop' ? 'Workshop' : 'Essay';
 	const lines = [
 		`# ${site.shortName}`,
 		'',
@@ -16,7 +16,7 @@ export async function GET(context: APIContext) {
 		'',
 		'## Posts',
 		'',
-		...posts.map((p) => `- [${p.data.title}](${origin}${base}/blog/${p.id}/): ${p.data.description}${p.data.tags.length ? ` (${p.data.tags.join(', ')})` : ''}`),
+		...items.map((item) => `- [${item.entry.data.title}](${origin}${item.url}): [${label(item.type)}] ${item.entry.data.description}${item.entry.data.tags.length ? ` (${item.entry.data.tags.join(', ')})` : ''}`),
 		'',
 		'## Full text',
 		'',

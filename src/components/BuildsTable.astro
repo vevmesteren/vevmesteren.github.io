@@ -1,0 +1,89 @@
+---
+import { getCollection } from 'astro:content';
+
+const entries = (await getCollection('builds')).sort((a, b) => a.data.order - b.data.order);
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<section class="builds">
+	<div class="builds-head">
+		<div class="title-row">
+			<h2 class="section-title">Builds</h2>
+			<span class="num">04</span>
+		</div>
+		<a class="gh-link" href="https://github.com/vevmesteren">github.com/vevmesteren →</a>
+	</div>
+	<div class="table-wrap">
+		<table>
+			<thead>
+				<tr>
+					<th>Project</th>
+					<th>What it does</th>
+					<th>Stack</th>
+					<th>Stars</th>
+					<th>Status</th>
+				</tr>
+			</thead>
+			<tbody>
+				{entries.map((entry) => {
+					const d = entry.data;
+					const nameEl = d.url ? (
+						<a href={d.url} class={d.mono ? 'mono-name' : 'phrase-name'}>{d.name}</a>
+					) : (
+						<span class={d.mono ? 'mono-name' : 'phrase-name'}>{d.name}</span>
+					);
+					return (
+						<tr>
+							<td class="project">
+								{nameEl}
+								{d.post && <span class="writeup"> · <a href={`${base}/blog/${d.post}/`}>write-up</a></span>}
+								<p class="summary-mobile">{d.summary}</p>
+							</td>
+							<td class="summary">{d.summary}</td>
+							<td class="stack">{d.stack}</td>
+							<td class="stars">{d.stars != null ? `★ ${d.stars}` : '·'}</td>
+							<td class={`status status-${d.status}`}>{d.status === 'open-source' ? '● Open source' : `○ ${d.statusLabel || 'Private'}`}</td>
+						</tr>
+					);
+				})}
+			</tbody>
+		</table>
+	</div>
+</section>
+
+<style>
+	.builds { padding: 48px 0; border-bottom: var(--rule); }
+	.builds-head { display: flex; flex-wrap: wrap; gap: 16px; align-items: baseline; justify-content: space-between; margin-bottom: 20px; }
+	.title-row { display: flex; align-items: baseline; gap: 20px; }
+	.section-title { margin: 0; font-size: var(--fs-section); line-height: 0.95; font-weight: 800; font-stretch: 72%; letter-spacing: -0.03em; }
+	.num { font: 400 var(--fs-meta)/1 var(--font-mono); }
+	.gh-link { font: 400 var(--fs-meta)/1 var(--font-mono); border-bottom: 1px solid var(--ink); padding-bottom: 2px; }
+	.table-wrap { overflow-x: auto; }
+	table { width: 100%; min-width: 860px; border-collapse: collapse; font-size: 17px; }
+	thead tr { font: 700 var(--fs-meta-sm)/1.5 var(--font-mono); text-align: left; border-top: var(--rule-heavy); border-bottom: var(--rule); text-transform: uppercase; letter-spacing: 0.04em; }
+	th { padding: 10px 16px 10px 0; font-weight: 700; }
+	th:not(:first-child) { padding-left: 16px; }
+	th:last-child { padding-right: 0; padding-left: 16px; }
+	tbody tr { border-bottom: 1px solid var(--hairline); }
+	tbody tr:last-child { border-bottom: var(--rule-heavy); }
+	td { padding: 18px 16px 18px 0; vertical-align: top; }
+	td:not(:first-child) { padding-left: 16px; }
+	td:last-child { padding-right: 0; padding-left: 16px; }
+	.project .mono-name { font: 700 17px/1.3 var(--font-mono); color: var(--ink); border-bottom: 1px solid var(--ink); }
+	.project .mono-name:hover { color: var(--accent); border-bottom-color: var(--accent); }
+	.project .phrase-name { font-size: 18px; font-weight: 700; color: var(--ink); }
+	.project .writeup { font: 400 var(--fs-meta)/1.5 var(--font-mono); color: var(--muted); }
+	.project .writeup a { color: var(--ink); border-bottom: 1px solid var(--ink); }
+	.summary { color: var(--ink-3); }
+	.summary-mobile { display: none; margin: 6px 0 0; color: var(--ink-3); font-size: 15px; }
+	.stack, .stars { font: 400 var(--fs-meta)/1.5 var(--font-mono); white-space: nowrap; }
+	.status { font: 400 var(--fs-meta)/1.5 var(--font-mono); white-space: nowrap; }
+	.status-open-source { color: var(--accent); }
+	.status-private { color: var(--faint); }
+	@media (max-width: 640px) {
+		table { min-width: 0; }
+		thead th:nth-child(2), thead th:nth-child(3), thead th:nth-child(4) { display: none; }
+		td.summary, td.stack, td.stars { display: none; }
+		.summary-mobile { display: block; }
+	}
+</style>

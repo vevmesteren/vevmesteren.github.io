@@ -1,0 +1,20 @@
+---
+import Base from '../../layouts/Base.astro';
+import PostList from '../../components/PostList.astro';
+import { getWorkshop } from '../../lib/posts';
+const posts = await getWorkshop();
+---
+
+<Base title="Workshop" description="Write-ups of the things I build at night.">
+	<section class="archive-head">
+		<h1 class="archive-title">Workshop</h1>
+		<p class="archive-blurb">Write-ups of the things I build at night.</p>
+	</section>
+	<PostList posts={posts} />
+</Base>
+
+<style>
+	.archive-head { padding: 48px 0 32px; border-bottom: var(--rule-heavy); }
+	.archive-title { margin: 0; font-size: var(--fs-section); font-weight: 800; font-stretch: 72%; letter-spacing: -0.03em; }
+	.archive-blurb { margin: 16px 0 0; font-size: var(--fs-lead); color: var(--ink-3); max-width: 760px; }
+</style>

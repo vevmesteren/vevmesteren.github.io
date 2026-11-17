@@ -1,0 +1,35 @@
+---
+import type { BlogPost } from '../lib/posts';
+import { formatDate, readingTime, kindOf } from '../lib/posts';
+
+interface Props { post: BlogPost; number?: number }
+const { post, number = 1 } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const label = kindOf(post) === 'workshop' ? 'Workshop' : 'Essay';
+const num = String(number).padStart(2, '0');
+---
+
+<section class="featured">
+	<p class="meta">{label} {num}<br />{formatDate(post.data.date)}<br />{readingTime(post.body)} min</p>
+	<div class="body">
+		<h2 class="title"><a href={`${base}/blog/${post.id}/`}>{post.data.title}</a></h2>
+		<p class="lead">{post.data.description}</p>
+		<a class="more" href={`${base}/blog/${post.id}/`}>Read the {label.toLowerCase()} →</a>
+	</div>
+</section>
+
+<style>
+	.featured { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); padding: 56px 0; border-bottom: var(--rule); }
+	.meta { grid-column: 1 / span 3; margin: 0; font: 400 var(--fs-meta)/1.7 var(--font-mono); color: var(--ink); }
+	.body { grid-column: 4 / span 9; }
+	.title { margin: 0; font-size: var(--fs-feature); line-height: 0.95; font-weight: 750; font-stretch: 78%; letter-spacing: -0.03em; }
+	.title a { color: var(--ink); }
+	.title a:hover { color: var(--accent); }
+	.lead { margin: 20px 0 0; font-size: 22px; line-height: 1.45; max-width: 760px; color: var(--ink-3); }
+	.more { display: inline-flex; align-items: center; gap: 8px; margin-top: 24px; font-weight: 700; font-size: 17px; border-bottom: 2px solid var(--accent); padding-bottom: 4px; color: var(--ink); }
+	.more:hover { color: var(--accent); }
+	@media (max-width: 900px) {
+		.featured { grid-template-columns: 1fr; gap: 16px; padding: 36px 0; }
+		.meta, .body { grid-column: auto; }
+	}
+</style>

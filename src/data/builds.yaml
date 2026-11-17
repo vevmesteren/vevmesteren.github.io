@@ -1,0 +1,30 @@
+# Builds table (homepage section 04). Order = display order.
+# status: open-source | private
+- name: remarkable-morning
+  url: https://github.com/vevmesteren/remarkable-morning
+  summary: "A daily news digest: 19 sources in three languages, curated by an LLM, delivered to my reMarkable as an EPUB for under five cents a run."
+  stack: Python
+  stars: 8          # consider fetching at build time from the GitHub API, with this as fallback
+  status: open-source
+  post: remarkable-morning   # slug of the write-up in the blog collection
+
+- name: remarkable-roundtrip
+  url: https://github.com/vevmesteren/remarkable-roundtrip
+  summary: "Publishes Obsidian pages to reMarkable as PDF, then pulls my handwritten annotations back into the vault as text."
+  stack: Python
+  stars: 3
+  status: open-source
+  post: remarkable-roundtrip
+
+- name: vevmesteren.com
+  url: https://github.com/vevmesteren/vevmesteren.github.io
+  summary: "This site. It answers questions, summarizes and translates itself."
+  stack: Astro
+  status: open-source
+
+- name: My personal multi-profile Agent Harness
+  summary: "An AI workforce I architect rather than prompt. Two profiles: one decides what to build and whether it's right, the other writes the code, runs the tests and ships the PRs. Every design goes through an adversarial review board, and no agent verifies its own work. 673 merged PRs so far."
+  stack: Hermes · OpenRouter
+  status: private
+  statusLabel: "Private, running"
+  mono: false       # name is set in Archivo, not Space Mono, because it is a phrase not a repo name

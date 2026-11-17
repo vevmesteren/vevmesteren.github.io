@@ -1,14 +1,14 @@
 import type { APIContext } from 'astro';
 import { site } from '../config';
-import { getPosts } from '../lib/posts';
+import { getAllItems } from '../lib/posts';
 
 export async function GET(context: APIContext) {
-	const posts = await getPosts();
-	const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+	const items = await getAllItems();
 	const origin = context.site!.origin;
 	const parts = [`# ${site.shortName}\n\n${site.description}\n`];
-	for (const p of posts) {
-		parts.push(`\n---\n\n# ${p.data.title}\n\nURL: ${origin}${base}/blog/${p.id}/\nDate: ${p.data.date.toISOString().slice(0, 10)}\n\n${p.body || ''}\n`);
+	for (const item of items) {
+		const label = item.type === 'radar' ? 'Radar' : item.type === 'workshop' ? 'Workshop' : 'Essay';
+		parts.push(`\n---\n\n# [${label}] ${item.entry.data.title}\n\nURL: ${origin}${item.url}\nDate: ${item.date.toISOString().slice(0, 10)}\n\n${item.entry.body || ''}\n`);
 	}
 	return new Response(parts.join(''), { headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
 }

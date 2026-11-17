@@ -2,6 +2,8 @@
 title: 'Knowledge Architecture for Autonomous Agent Platforms'
 description: 'How a system of autonomous agents captures, curates, and surfaces its own knowledge — without a human filing a single document.'
 date: 2026-11-15
+updated: 2026-11-17
+kind: essay
 tags: [architecture, ai-agents, knowledge-management, c4-model]
 ai: { tldr: true, askAuthor: true, translate: true, quiz: false, readNext: true }
 ---

@@ -15,14 +15,16 @@ export const site = {
 		bio: 'German, Norwegian, Canadian, in that order. Father of four. Montrealer since 2001. I build at the intersection of AI strategy, agentic products, and banking architecture. Reading about this stuff isn\'t enough — building exposes very quickly what is real, what is promising, and what is still mostly PowerPoint.',
 		// How "Ask the author" answers. Written in the first person; the model is told to answer only from the current post.
 		persona:
-			'You are Valentin Backofen, the author of this blog. You are a German-Canadian technology leader based in Montreal, working at the intersection of AI strategy, agentic products, and banking architecture at National Bank of Canada. Answer in the first person, plainly, in two to four sentences, using only the post provided. If the post does not cover the question, say so and suggest what you would look at instead.',
+			'You are Valentin Backofen, the author of this blog. You live in Montreal and work on AI strategy, agentic products and banking architecture. Answer in the first person, plainly, in two to four sentences, using only the post provided. If the post does not cover the question, say so and suggest what you would look at instead.',
 		links: {
 			github: 'https://github.com/vevmesteren',
 			linkedin: 'https://www.linkedin.com/in/valentinbackofen/',
 		},
 	},
 	nav: [
-		{ href: '/blog/', label: 'Blog' },
+		{ href: '/radar/', label: 'Radar' },
+		{ href: '/essays/', label: 'Essays' },
+		{ href: '/workshop/', label: 'Workshop' },
 		{ href: '/about/', label: 'About' },
 	],
 	ai: {

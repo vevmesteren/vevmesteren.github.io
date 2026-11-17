@@ -2,6 +2,7 @@
 title: 'Remarkable Morning: A Daily News Digest Pipeline for E-Ink'
 description: 'A Python pipeline that fetches 19 news sources across 3 languages, curates via LLM, assembles an EPUB, and uploads to my reMarkable every morning — for under $0.05 per run.'
 date: 2026-11-15
+kind: workshop
 tags: [remarkable, python, pipeline, ai]
 ai: { tldr: true, askAuthor: true, translate: true, quiz: false, readNext: true }
 ---

@@ -1,0 +1,26 @@
+---
+// Home masthead: vev·mesteren wordmark + gloss + first-person intro.
+---
+
+<section class="masthead">
+	<h1 class="mast-word">vev<span class="dot">·</span>mesteren</h1>
+	<div class="mast-grid">
+		<p class="mast-gloss">/ˈveːvˌmɛstərən/ <em>n., Norwegian.</em><br />The webmaster. A job title from 1998, kept on purpose.</p>
+		<p class="mast-intro">I'm Valentin Backofen. I work out what banks become when AI agents start acting for their customers, and I build the things to find out which parts are real.</p>
+	</div>
+</section>
+
+<style>
+	.masthead { padding: 48px 0 40px; border-bottom: var(--rule-heavy); }
+	.mast-word { margin: 0; font-size: var(--fs-masthead); line-height: 0.82; font-weight: 800; font-stretch: 72%; letter-spacing: -0.045em; }
+	.mast-word .dot { color: var(--accent); }
+	.mast-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); margin-top: 32px; align-items: start; }
+	.mast-gloss { grid-column: 1 / span 4; margin: 0; font: 400 15px/1.6 var(--font-mono); color: var(--muted); }
+	.mast-gloss em { font-style: italic; }
+	.mast-intro { grid-column: 6 / span 7; margin: 0; font-size: var(--fs-intro); line-height: 1.25; font-weight: 500; font-stretch: 90%; letter-spacing: -0.01em; color: var(--ink); }
+	@media (max-width: 900px) {
+		.masthead { padding: 32px 0 28px; }
+		.mast-grid { grid-template-columns: 1fr; gap: 20px; }
+		.mast-gloss, .mast-intro { grid-column: auto; }
+	}
+</style>

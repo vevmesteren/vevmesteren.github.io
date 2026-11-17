@@ -1,9 +1,11 @@
 ---
-import type { Post } from '../lib/posts';
+import type { BlogPost, RadarPost } from '../lib/posts';
 import { formatDate, readingTime, tagSlug } from '../lib/posts';
-interface Props { posts: Post[] }
-const { posts } = Astro.props;
+
+interface Props { posts: (BlogPost | RadarPost)[]; kind?: 'blog' | 'radar' }
+const { posts, kind = 'blog' } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const urlFor = (p: BlogPost | RadarPost) => kind === 'radar' ? `${base}/radar/${p.id}/` : `${base}/blog/${p.id}/`;
 ---
 
 <ul class="post-list">
@@ -11,11 +13,11 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 		<li>
 			<time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
 			<div>
-				<h3><a href={`${base}/blog/${post.id}/`}>{post.data.title}</a></h3>
+				<h3><a href={urlFor(post)}>{post.data.title}</a></h3>
 				<p>{post.data.description}</p>
 				<div class="tags">
 					{post.data.tags.map((t) => <a class="tag" href={`${base}/tags/${tagSlug(t)}/`}>{t}</a>)}
-					<span class="tag">{readingTime(post.body)} min</span>
+					{kind === 'blog' && <span class="tag">{readingTime((post as BlogPost).body)} min</span>}
 				</div>
 			</div>
 		</li>

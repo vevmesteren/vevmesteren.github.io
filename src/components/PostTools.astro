@@ -7,21 +7,21 @@ const langs = site.ai.languages;
 ---
 
 <post-tools class="article-tools" data-title={title} data-persona={site.author.persona} data-author={site.author.name} data-ai-ui>
-	<div class="bar small">
+	<div class="bar">
 		{tldr && <button type="button" data-act="tldr">TL;DR</button>}
-		<button type="button" data-act="plain">Plain English</button>
+		{translate && (
+			<label class="translate-wrap" style="display:inline-flex;align-items:center;margin:0;padding:0;border:0">
+				<span class="visually-hidden" style="position:absolute;left:-9999px">Translate</span>
+				<select data-translate aria-label="Translate this post" style="height:48px;width:auto;border:0;background:transparent;padding:0 32px 0 18px;font:700 15px/1 var(--font-sans);cursor:pointer;color:var(--ink)">
+					<option value="">Translate</option>
+					{langs.map((l) => <option value={l.code}>{l.label}</option>)}
+				</select>
+			</label>
+		)}
 		{askAuthor && <button type="button" data-act="ask">Ask the author</button>}
-		<button type="button" data-act="share">Share draft</button>
+		<button type="button" data-act="plain">Plain English</button>
+		<button type="button" data-act="share">Share</button>
 	</div>
-	{translate && (
-		<label class="translate" style="margin:0;display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:14px">
-			<span>Translate</span>
-			<select data-translate aria-label="Translate this post" style="height:36px;width:auto;font-size:14px">
-				<option value="">Original</option>
-				{langs.map((l) => <option value={l.code}>{l.label}</option>)}
-			</select>
-		</label>
-	)}
 	<span class="status tool-status" style="margin:0" aria-live="polite"></span>
 
 	<div class="panel tool-panel" hidden data-ai-ui style="flex-basis:100%;margin-top:12px">

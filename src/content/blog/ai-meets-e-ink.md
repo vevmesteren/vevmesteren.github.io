@@ -2,6 +2,7 @@
 title: 'AI Meets E-Ink: The Agent Topology'
 description: 'The original round-trip: an AI agent pushes a document to a reMarkable tablet, the human annotates by hand on e-ink, and the agent reads the handwriting back. Where modern AI and pen-and-paper meet.'
 date: 2026-11-15
+kind: essay
 tags: [remarkable, ai, agents, e-ink]
 ai: { tldr: true, askAuthor: true, translate: true, quiz: false, readNext: true }
 ---

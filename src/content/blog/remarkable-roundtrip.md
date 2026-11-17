@@ -2,6 +2,7 @@
 title: 'Remarkable Roundtrip: Publishing Obsidian to E-Ink and Pulling Handwriting Back'
 description: 'The only open-source tool that does the full round-trip: publish Obsidian to reMarkable as PDF, annotate by hand, pull handwriting back into your vault as text via vision LLM.'
 date: 2026-11-15
+kind: workshop
 tags: [remarkable, obsidian, python, ai]
 ai: { tldr: true, askAuthor: true, translate: true, quiz: false, readNext: true }
 ---

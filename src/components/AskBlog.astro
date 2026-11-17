@@ -6,15 +6,16 @@ const name = site.name;
 ---
 
 <ask-blog data-name={name}>
-	<button class="icon-button ask-open" type="button" aria-label="Ask the blog" aria-keyshortcuts="Control+/" title="Ask the blog (Ctrl+/)">
-		<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z" /><path d="M19 17l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z" /></svg>
+	<button class="ask-trigger ask-open" type="button" aria-keyshortcuts="Control+/" title="Ask the blog (Ctrl+/)">
+		<svg width="16" height="16" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><circle cx="11" cy="11" r="7" /><path d="M20 20l-4-4" /></svg>
+		<span>Ask</span>
 	</button>
 	<dialog class="ai-dialog" aria-label="Ask the blog">
 		<div class="panel-head"><span>Ask {name}</span><button type="button" class="ask-close icon-button" aria-label="Close">×</button></div>
 		<div class="panel-body">
 			<form class="row ask-form">
 				<input type="text" name="q" autocomplete="off" maxlength="400" placeholder="Ask anything these posts cover" required />
-				<button type="submit" class="primary">Ask</button>
+				<button type="submit" class="btn">Ask</button>
 			</form>
 			<p class="status ask-status" aria-live="polite"></p>
 			<div class="ai-thread ask-thread" hidden>
