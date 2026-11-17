@@ -41,9 +41,9 @@ const isActive = (href: string) => path === href || (href !== '/' && path.starts
 		{noindex && <meta name="robots" content="noindex" />}
 		<script async src="https://www.googletagmanager.com/gtm.js?id=GTM-WLBP642G"></script>
 		<script is:inline>
-			window.dataLayer = window.dataLayer || [];
-			function gtag(){dataLayer.push(arguments);}
-			gtag('js', new Date());
+  			window.dataLayer = window.dataLayer || [];
+  			function gtag(){dataLayer.push(arguments);}
+  			gtag('js', new Date());
 		</script>
 		<slot name="head" />
 	</head>
