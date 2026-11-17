@@ -1,30 +1,29 @@
 ---
 import Base from '../layouts/Base.astro';
-import PostList from '../components/PostList.astro';
+import Masthead from '../components/Masthead.astro';
+import Timeline from '../components/Timeline.astro';
+import FeaturedPost from '../components/FeaturedPost.astro';
+import SectionIndex from '../components/SectionIndex.astro';
+import BuildsTable from '../components/BuildsTable.astro';
 import ReaderFit from '../components/ReaderFit.astro';
-import { site, hasKey } from '../config';
-import { getPosts } from '../lib/posts';
-const posts = (await getPosts()).slice(0, 5);
-const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+import { getEssays, getWorkshop, getRadar, getPosts } from '../lib/posts';
+
+const [essays, workshop, radar, allPosts] = await Promise.all([getEssays(), getWorkshop(), getRadar(), getPosts()]);
+const featured = essays[0] || allPosts[0];
+const featuredNumber = essays[0] ? essays.length : allPosts.length;
+
+const columns = [
+	{ num: '01', title: 'Radar', href: '/radar/', blurb: 'Short, dated, sourced. What moved in agentic banking.', kind: 'radar' as const, items: radar.slice(0, 4) },
+	{ num: '02', title: 'Essays', href: '/essays/', blurb: 'Long-form architecture and strategy. Take a coffee.', kind: 'blog' as const, items: essays.slice(0, 4) },
+	{ num: '03', title: 'Workshop', href: '/workshop/', blurb: 'Write-ups of the things I build at night.', kind: 'blog' as const, items: workshop.slice(0, 4) },
+];
 ---
 
 <Base landing>
-	<section>
-		<div class="hero">
-			<div>
-				<h1><span class="light">{site.scene}</span>{site.tagline}</h1>
-				<p class="lead">{site.author.bio} This is where I publish findings from my radar research, project deep-dives, and thoughts that don't fit in a LinkedIn post.</p>
-				<nav class="bar" aria-label="Start">
-					<a href={`${base}/blog/`}>Read the blog</a>
-					<a href={`${base}/about/`}>About me</a>
-				</nav>
-			</div>
-			<ReaderFit />
-		</div>
-	</section>
-	<section>
-		<div class="section-head"><h2>Latest posts</h2><p>Open any post and try the TL;DR, Translate and Ask the author buttons at the top.{!hasKey && ' AI features will activate once a OneTag key is configured.'}</p></div>
-		<PostList posts={posts} />
-		<p style="margin-top:24px"><a class="button secondary" href={`${base}/blog/`}>All posts</a></p>
-	</section>
+	<Masthead />
+	<Timeline />
+	{featured && <FeaturedPost post={featured} number={featuredNumber} />}
+	<SectionIndex columns={columns} />
+	<BuildsTable />
+	<ReaderFit />
 </Base>

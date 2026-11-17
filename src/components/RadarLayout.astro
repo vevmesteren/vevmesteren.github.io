@@ -1,0 +1,80 @@
+---
+// Radar post layout: meta line, title, hero (optional), body, sources, related.
+import type { RadarPost } from '../lib/posts';
+import { formatDate } from '../lib/posts';
+import { Image } from 'astro:assets';
+
+interface Props { post: RadarPost; related?: RadarPost[] }
+const { post, related = [] } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const n = post.data.sources.length;
+const host = (u: string) => { try { return new URL(u).host.replace(/^www\./, ''); } catch { return u; } };
+---
+
+<header class="radar-header">
+	<p class="meta-line">Radar · {formatDate(post.data.date)} · {post.data.domain} · {n} source{n === 1 ? '' : 's'}</p>
+	<h1 class="radar-title">{post.data.title}</h1>
+	<p class="radar-desc">{post.data.description}</p>
+</header>
+
+{post.data.hero && (
+	<figure class="radar-hero">
+		<Image src={post.data.hero} alt={post.data.heroAlt || ''} widths={[640, 1024, 1360]} />
+	</figure>
+)}
+
+<article class="radar-body" data-pagefind-body>
+	<div class="prose"><slot /></div>
+</article>
+
+<section class="radar-sources">
+	<h2 class="sources-head">Sources</h2>
+	<ol class="sources-list">
+		{post.data.sources.map((url, i) => (
+			<li>
+				<span class="num">{String(i + 1).padStart(2, '0')}</span>
+				<a href={url}>{host(url)}</a>
+				<span class="url">{url}</span>
+			</li>
+		))}
+	</ol>
+</section>
+
+{related.length > 0 && (
+	<section class="radar-related">
+		<h2 class="related-head">Related signals</h2>
+		<ul class="related-list">
+			{related.map((r) => (
+				<li><a href={`${base}/radar/${r.id}/`}>{r.data.title} <span class="arrow">→</span></a></li>
+			))}
+		</ul>
+	</section>
+)}
+
+<style>
+	.radar-header { padding: 48px 0 32px; border-bottom: var(--rule-heavy); }
+	.meta-line { margin: 0 0 20px; font: 400 var(--fs-meta)/1.5 var(--font-mono); color: var(--ink); }
+	.radar-title { margin: 0; font-size: var(--fs-feature); line-height: 0.95; font-weight: 800; font-stretch: 75%; letter-spacing: -0.03em; color: var(--ink); max-width: 1100px; }
+	.radar-desc { margin: 24px 0 0; font-size: var(--fs-lead); line-height: 1.4; font-weight: 500; color: var(--ink-3); max-width: 760px; }
+	.radar-hero { margin: 32px 0; padding: 0; border: 1px solid var(--ink); }
+	.radar-hero img { display: block; width: 100%; height: auto; }
+	.radar-body { padding: 36px 0; max-width: 760px; }
+	.radar-sources { padding: 32px 0; border-top: var(--rule-heavy); }
+	.sources-head, .related-head { margin: 0 0 16px; font: 700 var(--fs-meta)/1 var(--font-mono); text-transform: uppercase; letter-spacing: 0.04em; color: var(--ink); }
+	.sources-list { list-style: none; margin: 0; padding: 0; }
+	.sources-list li { display: grid; grid-template-columns: 40px minmax(0, 200px) 1fr; column-gap: 16px; padding: 10px 0; border-bottom: 1px solid var(--hairline); font-size: 15px; align-items: baseline; }
+	.sources-list .num { font: 400 var(--fs-meta-sm)/1 var(--font-mono); color: var(--faint); }
+	.sources-list a { font-weight: 700; color: var(--ink); border-bottom: 1px solid var(--ink); }
+	.sources-list a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+	.sources-list .url { font: 400 var(--fs-meta-sm)/1.4 var(--font-mono); color: var(--muted); overflow-wrap: anywhere; }
+	.radar-related { padding: 32px 0 64px; border-top: var(--rule); }
+	.related-list { list-style: none; margin: 0; padding: 0; }
+	.related-list li { border-bottom: 1px solid var(--hairline); }
+	.related-list a { display: block; padding: 14px 0; font-size: 22px; font-weight: 700; color: var(--ink); }
+	.related-list a:hover { color: var(--accent); }
+	.related-list .arrow { display: inline-block; margin-left: 8px; }
+	@media (max-width: 640px) {
+		.sources-list li { grid-template-columns: 40px 1fr; }
+		.sources-list .url { grid-column: 2; margin-top: 4px; }
+	}
+</style>

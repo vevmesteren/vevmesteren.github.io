@@ -7,8 +7,19 @@ const tags = [...new Set(posts.flatMap((p) => p.data.tags))].sort();
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
-<Base title="Blog" description="All posts." narrow>
-	<h1 class="page-title">Blog</h1>
-	<p class="note" style="margin-bottom:24px">{posts.length} posts. {tags.map((t) => <a class="tag" href={`${base}/tags/${tagSlug(t)}/`} style="margin-right:6px">{t}</a>)}</p>
+<Base title="Blog" description="All posts, essays and workshop write-ups.">
+	<section class="archive-head">
+		<h1 class="archive-title">Blog</h1>
+		<p class="archive-meta">{posts.length} posts · <a href={`${base}/essays/`}>Essays</a> · <a href={`${base}/workshop/`}>Workshop</a></p>
+		<p class="archive-tags">{tags.map((t) => <a class="tag" href={`${base}/tags/${tagSlug(t)}/`}>{t}</a>)}</p>
+	</section>
 	<PostList posts={posts} />
 </Base>
+
+<style>
+	.archive-head { padding: 48px 0 32px; border-bottom: var(--rule-heavy); margin-bottom: 0; }
+	.archive-title { margin: 0; font-size: var(--fs-section); font-weight: 800; font-stretch: 72%; letter-spacing: -0.03em; }
+	.archive-meta { margin: 16px 0 0; font: 400 var(--fs-meta)/1.5 var(--font-mono); color: var(--muted); }
+	.archive-meta a { color: var(--ink); border-bottom: 1px solid var(--ink); }
+	.archive-tags { margin: 16px 0 0; display: flex; flex-wrap: wrap; gap: 6px; }
+</style>

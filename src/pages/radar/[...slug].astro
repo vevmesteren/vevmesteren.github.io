@@ -1,0 +1,26 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import RadarLayout from '../../components/RadarLayout.astro';
+import ReadNext from '../../components/ReadNext.astro';
+import { getRadar } from '../../lib/posts';
+
+export async function getStaticPaths() {
+	const posts = await getRadar();
+	return posts.map((post) => {
+		const related = posts.filter((p) => p.id !== post.id && p.data.tags.some((t) => post.data.tags.includes(t))).slice(0, 3);
+		return { params: { slug: post.id }, props: { post, related } };
+	});
+}
+const { post, related } = Astro.props;
+const { Content } = await render(post);
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const path = `${base}/radar/${post.id}/`;
+---
+
+<Base title={post.data.title} description={post.data.description} type="article">
+	<RadarLayout post={post} related={related}>
+		<Content />
+	</RadarLayout>
+	{post.data.ai.readNext && <ReadNext current={path} />}
+</Base>

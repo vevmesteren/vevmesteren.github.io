@@ -1,0 +1,36 @@
+---
+import PostTools from './PostTools.astro';
+import { formatDate, readingTime, tagSlug, kindOf } from '../lib/posts';
+import type { BlogPost } from '../lib/posts';
+
+interface Props { post: BlogPost; number: number }
+const { post, number } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const ai = post.data.ai;
+const label = kindOf(post) === 'workshop' ? 'Workshop' : 'Essay';
+const num = String(number).padStart(2, '0');
+---
+
+<header class="post-header">
+	<p class="meta-line">{label} {num} · {formatDate(post.data.date)} · {readingTime(post.body)} min · {post.data.tags.map((t, i) => (
+		<>
+			{i > 0 && ', '}
+			<a href={`${base}/tags/${tagSlug(t)}/`}>{t}</a>
+		</>
+	))}</p>
+	<h1 class="post-title">{post.data.title}</h1>
+	<div class="post-sub">
+		<p class="post-desc">{post.data.description}</p>
+		<PostTools tldr={ai.tldr} translate={ai.translate} askAuthor={ai.askAuthor} title={post.data.title} />
+	</div>
+</header>
+
+<style>
+	.post-header { padding: 48px 0 40px; border-bottom: var(--rule-heavy); }
+	.meta-line { margin: 0 0 20px; font: 400 var(--fs-meta)/1.5 var(--font-mono); color: var(--ink); }
+	.meta-line a { color: var(--ink); border-bottom: 1px solid var(--muted); }
+	.meta-line a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+	.post-title { margin: 0; font-size: var(--fs-h1-post); line-height: 0.88; font-weight: 800; font-stretch: 70%; letter-spacing: -0.04em; max-width: 1200px; color: var(--ink); }
+	.post-sub { display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-end; justify-content: space-between; margin-top: 32px; }
+	.post-desc { margin: 0; flex: 1 1 560px; font-size: var(--fs-lead); line-height: 1.4; font-weight: 500; max-width: 760px; color: var(--ink-2); }
+</style>

@@ -1,16 +1,30 @@
 ---
-// After a post: three posts to read next, chosen from llms.txt by what this post was about, each with a reason.
+// After a post: three posts to read next, chosen from llms.txt by what this post was about.
 interface Props { current: string }
 const { current } = Astro.props;
 ---
 
-<read-next class="aside-box" data-current={current} data-ai-ui>
-	<h3>Read next</h3>
-	<p class="note" style="margin:0 0 12px">Three posts that follow on from this one, picked from the whole blog with a reason each.</p>
-	<button type="button" class="button secondary small rn-go">Pick three for me</button>
-	<ul class="squares rn-list" hidden style="margin:12px 0 0"></ul>
-	<p class="status rn-status" style="margin:0"></p>
+<read-next class="read-next" data-current={current} data-ai-ui>
+	<span class="label">Read next</span>
+	<button type="button" class="rn-go">Pick three for me →</button>
+	<ul class="rn-list" hidden></ul>
+	<p class="status rn-status"></p>
 </read-next>
+
+<style>
+	.read-next { display: flex; flex-wrap: wrap; gap: 24px; align-items: baseline; justify-content: space-between; padding: 32px 0 72px; border-top: var(--rule-heavy); }
+	.read-next .label { font: 400 var(--fs-meta)/1 var(--font-mono); color: var(--ink); }
+	.rn-go { flex: 1 1 400px; text-align: left; font-size: 40px; font-weight: 800; font-stretch: 75%; letter-spacing: -0.02em; line-height: 1; color: var(--ink); background: transparent; border: 0; padding: 0; cursor: pointer; }
+	.rn-go:hover { color: var(--accent); }
+	.rn-list { list-style: none; margin: 0; padding: 0; flex-basis: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+	.rn-list li a { display: block; font-size: 32px; font-weight: 800; font-stretch: 75%; letter-spacing: -0.02em; line-height: 1.05; color: var(--ink); }
+	.rn-list li a:hover { color: var(--accent); }
+	.rn-list li .why { display: block; margin-top: 8px; font: 400 var(--fs-meta)/1.5 var(--font-mono); color: var(--muted); }
+	@media (max-width: 900px) {
+		.rn-list { grid-template-columns: 1fr; }
+		.rn-go { font-size: 32px; }
+	}
+</style>
 
 <script>
 	import { ask, hasKey, errorText, cached, hashText } from '../scripts/ai';
@@ -28,7 +42,7 @@ const { current } = Astro.props;
 						`Here is a blog's index of posts and the text of the post the reader just finished (URL path ${this.dataset.current}). Pick the three best posts to read next, not the current one. Return JSON {"picks":[{"title":string,"url":string,"why":string}]} with URLs copied exactly from the index and "why" one short sentence that refers to something in the finished post.`,
 						{ index, finished_post: text }, { json: true, maxTokens: 400 }));
 					const picks = (res?.picks || []).filter((p: any) => p?.url && !String(p.url).includes(this.dataset.current!)).slice(0, 3);
-					list.innerHTML = picks.map((p: any) => `<li><a href="${p.url}">${p.title}</a><br><span class="note">${p.why}</span></li>`).join('');
+					list.innerHTML = picks.map((p: any) => `<li><a href="${p.url}">${p.title} →</a><span class="why">${p.why}</span></li>`).join('');
 					list.hidden = !picks.length; status.textContent = picks.length ? '' : 'Nothing else to suggest yet.'; btn.hidden = true;
 				} catch (e) { status.textContent = errorText(e); btn.disabled = false; }
 			});

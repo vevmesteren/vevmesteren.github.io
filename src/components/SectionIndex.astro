@@ -1,0 +1,59 @@
+---
+import type { BlogPost, RadarPost } from '../lib/posts';
+import { formatDateShort, readingTime } from '../lib/posts';
+
+interface Column {
+	num: string;
+	title: string;
+	href: string;
+	blurb: string;
+	kind: 'radar' | 'blog';
+	items: (BlogPost | RadarPost)[];
+}
+
+interface Props { columns: Column[] }
+const { columns } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const urlFor = (col: Column, item: BlogPost | RadarPost) => col.kind === 'radar' ? `${base}/radar/${item.id}/` : `${base}/blog/${item.id}/`;
+---
+
+<section class="section-index">
+	<ol class="cells cells-index">
+		{columns.map((col) => (
+			<li>
+				<div class="head">
+					<h3 class="col-title"><a href={base + col.href}>{col.title}</a></h3>
+					<span class="col-num">{col.num}</span>
+				</div>
+				<p class="blurb">{col.blurb}</p>
+				<ul class="col-items">
+					{col.items.map((item) => (
+						<li>
+							<a href={urlFor(col, item)}>
+								<span class="item-meta">{col.kind === 'radar' ? formatDateShort(item.data.date) : `${readingTime((item as BlogPost).body)} min`}</span>
+								<span class="item-title">{item.data.title}</span>
+							</a>
+						</li>
+					))}
+				</ul>
+			</li>
+		))}
+	</ol>
+</section>
+
+<style>
+	.section-index { border-bottom: var(--rule-heavy); }
+	.cells-index { list-style: none; }
+	.head { display: flex; justify-content: space-between; align-items: baseline; margin: 0; }
+	.col-title { margin: 0; font-size: var(--fs-column); font-weight: 800; font-stretch: 75%; letter-spacing: -0.02em; }
+	.col-title a { color: var(--ink); }
+	.col-title a:hover { color: var(--accent); }
+	.col-num { font: 400 var(--fs-meta)/1 var(--font-mono); color: var(--ink); }
+	.blurb { margin: 8px 0 24px; font-size: var(--fs-ui); color: var(--muted); }
+	.col-items { list-style: none; margin: 0; padding: 0; }
+	.col-items li { border-top: 1px solid var(--hairline); }
+	.col-items a { display: block; padding: 14px 0; color: var(--ink); }
+	.col-items a:hover { color: var(--accent); }
+	.item-meta { font: 400 var(--fs-meta-sm)/1 var(--font-mono); color: var(--faint); }
+	.item-title { display: block; font-size: 20px; font-weight: 600; margin-top: 4px; line-height: 1.25; }
+</style>

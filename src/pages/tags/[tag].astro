@@ -1,17 +1,46 @@
 ---
 import Base from '../../layouts/Base.astro';
-import PostList from '../../components/PostList.astro';
-import { getPosts, tagSlug } from '../../lib/posts';
+import { getAllItems, tagSlug, formatDate } from '../../lib/posts';
 
 export async function getStaticPaths() {
-	const posts = await getPosts();
-	const tags = [...new Set(posts.flatMap((p) => p.data.tags))];
-	return tags.map((tag) => ({ params: { tag: tagSlug(tag) }, props: { tag, posts: posts.filter((p) => p.data.tags.includes(tag)) } }));
+	const items = await getAllItems();
+	const tags = [...new Set(items.flatMap((i) => i.entry.data.tags))];
+	return tags.map((tag) => ({
+		params: { tag: tagSlug(tag) },
+		props: { tag, items: items.filter((i) => i.entry.data.tags.includes(tag)) },
+	}));
 }
-const { tag, posts } = Astro.props;
+const { tag, items } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
-<Base title={`Tag: ${tag}`} description={`Posts tagged ${tag}.`} narrow>
-	<h1 class="page-title">Tag: {tag}</h1>
-	<PostList posts={posts} />
+<Base title={`Tag: ${tag}`} description={`Items tagged ${tag}.`}>
+	<section class="archive-head">
+		<h1 class="archive-title">#{tag}</h1>
+		<p class="archive-blurb">{items.length} item{items.length === 1 ? '' : 's'}.</p>
+	</section>
+	<ul class="tag-list">
+		{items.map((item) => (
+			<li>
+				<a href={item.url}>
+					<span class="tag-meta">{item.type === 'radar' ? 'Radar' : item.type === 'workshop' ? 'Workshop' : 'Essay'} · {formatDate(item.date)}</span>
+					<span class="tag-title">{item.entry.data.title}</span>
+					<span class="tag-desc">{item.entry.data.description}</span>
+				</a>
+			</li>
+		))}
+	</ul>
 </Base>
+
+<style>
+	.archive-head { padding: 48px 0 32px; border-bottom: var(--rule-heavy); }
+	.archive-title { margin: 0; font-size: var(--fs-section); font-weight: 800; font-stretch: 72%; letter-spacing: -0.03em; }
+	.archive-blurb { margin: 16px 0 0; font: 400 var(--fs-meta)/1.5 var(--font-mono); color: var(--muted); }
+	.tag-list { list-style: none; margin: 0; padding: 0; }
+	.tag-list li { border-bottom: 1px solid var(--hairline); }
+	.tag-list a { display: block; padding: 20px 0; color: var(--ink); }
+	.tag-list a:hover .tag-title { color: var(--accent); }
+	.tag-meta { display: block; font: 400 var(--fs-meta)/1.5 var(--font-mono); color: var(--faint); }
+	.tag-title { display: block; font-size: 22px; font-weight: 700; line-height: 1.2; margin: 4px 0; }
+	.tag-desc { display: block; font-size: var(--fs-ui); color: var(--ink-3); max-width: 760px; }
+</style>

@@ -4,13 +4,11 @@ import { site } from '../config';
 ---
 
 <Base title="About" narrow>
-	<h1 class="page-title">About</h1>
-	<article class="prose">
-		<blockquote>
-			<p>"Always code as if the guy who ends up maintaining your code will be a violent psychopath who knows where you live."</p>
-			<footer>— John Woods</footer>
-		</blockquote>
-
+	<section class="about-head">
+		<p class="meta-line">About</p>
+		<h1 class="about-title">A webmaster from 1998, still at it.</h1>
+	</section>
+	<article class="prose about-body">
 		<p>I wanted to become an actor and a historian. Then the web happened to me in 1998.</p>
 
 		<p>German, Norwegian, Canadian, in that order. Father of four. Montrealer since 2001.</p>
@@ -19,19 +17,17 @@ import { site } from '../config';
 
 		<p>I spent about a decade in advertising, building digital experiences for Toyota, IKEA, Air Canada, L'Oréal and Rogers at McCann, Ogilvy and Pheromone. Then I co-founded Qi Sports and spent four years as CEO, experiencing the startup circus from the inside.</p>
 
-		<p>Eventually, I went back to my technological roots, helped build the Digital Factory at BRP, and joined National Bank of Canada in 2021.</p>
+		<p>Eventually, I went back to my technological roots, helped build the Digital Factory at BRP, and joined a Canadian bank in 2021.</p>
 
 		<p>Along the way, I've shipped code, built products, built teams, run a company, worked agency-side and client-side, and accumulated a reasonably well-tuned BS detector. My strength has always been cutting through technical jargon to get to what actually matters.</p>
 
 		<p>Today, I spend much of my time thinking about what happens when AI stops being something people use and starts becoming something that acts.</p>
 
-		<p>At National Bank, my work sits across AI strategy and governance, the Product Development Life Cycle, our Enterprise Agent Harness, and agentic customer products. The technology matters, obviously. But I'm much more interested in the business question behind it: <em>What does a 165-year-old bank need to become when AI agents start acting as economic participants alongside humans?</em></p>
+		<p>My work sits across AI strategy and governance, product development, agent harnesses, and agentic customer products. The technology matters, obviously. But I'm much more interested in the business question behind it: <em>what does a 165-year-old bank need to become when AI agents start acting as economic participants alongside humans?</em></p>
 
 		<p>That question quickly goes beyond AI or software development. It touches products, channels, customer relationships, identity, trust, consent, transactions, and ultimately the role a bank plays when the customer may no longer be the one directly operating the interface.</p>
 
 		<p>I'm also actively building with autonomous AI agents and experimenting at the frontier of agentic coding. Reading about this stuff isn't enough. Building exposes very quickly what is real, what is promising, and what is still mostly PowerPoint.</p>
-
-		<p>That probably summarizes my general philosophy pretty well.</p>
 
 		<p>Technology without customer value is just technology. Business value without architecture and technological grounding is just PowerPoint. One widens the gap between IT and Business; the other fills that gap with meetings. Neither gets us very far. The real work is bringing both together, and in a field moving this quickly, anyone confidently telling you "this is the way" is probably overselling.</p>
 
@@ -42,3 +38,10 @@ import { site } from '../config';
 		<p>Find me on <a href={site.author.links.github}>GitHub</a> and <a href={site.author.links.linkedin}>LinkedIn</a>.</p>
 	</article>
 </Base>
+
+<style>
+	.about-head { padding: 48px 0 32px; border-bottom: var(--rule-heavy); }
+	.about-head .meta-line { margin: 0 0 16px; font: 400 var(--fs-meta)/1.5 var(--font-mono); color: var(--ink); }
+	.about-title { margin: 0; font-size: var(--fs-feature); font-weight: 800; font-stretch: 72%; letter-spacing: -0.03em; line-height: 0.95; max-width: 1100px; }
+	.about-body { padding: 36px 0 64px; max-width: 760px; }
+</style>
