@@ -3,7 +3,7 @@ import { render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import RadarLayout from '../../components/RadarLayout.astro';
 import ReadNext from '../../components/ReadNext.astro';
-import { getRadar } from '../../lib/posts';
+import { getRadar, readingTime } from '../../lib/posts';
 
 export async function getStaticPaths() {
 	const posts = await getRadar();
@@ -16,9 +16,10 @@ const { post, related } = Astro.props;
 const { Content } = await render(post);
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const path = `${base}/radar/${post.id}/`;
+const estReadingTime = readingTime(post.body);
 ---
 
-<Base title={post.data.title} description={post.data.description} type="article">
+<Base title={post.data.title} description={post.data.description} type="article" contentKind="radar" contentTags={post.data.tags} contentReadingTime={estReadingTime}>
 	<RadarLayout post={post} related={related}>
 		<Content />
 	</RadarLayout>

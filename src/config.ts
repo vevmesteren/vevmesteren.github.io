@@ -45,6 +45,10 @@ export const site = {
 			{ code: 'zh-Hans', label: '中文' },
 		],
 	},
+	analytics: {
+		// GA4 measurement ID (not GTM container ID). Public by design — ships in HTML like any analytics tag.
+		gaId: 'G-D1V9V4KMG9',
+	},
 	postsPerPage: 10,
 } as const;
 
