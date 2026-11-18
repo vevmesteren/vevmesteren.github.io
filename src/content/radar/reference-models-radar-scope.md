@@ -2,7 +2,7 @@
 title: 'What the reference models radar watches'
 description: 'The scope and strategy behind a weekly Tuesday scan for banking reference models, data standards, and interoperability frameworks — who defines the rails the ecosystem runs on.'
 date: 2026-11-18
-domain: standards
+domain: reference-models
 tags: [reference-models-radar, bian, iso20022, fdx, open-banking, standards, interoperability, strategy]
 sources:
   - https://www.bian.org/reference-architecture
