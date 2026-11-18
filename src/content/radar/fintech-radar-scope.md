@@ -13,7 +13,7 @@ draft: false
 ---
 Every Monday at 17:00 UTC, a scheduled job scans the open web for fintech market signals. Not what banks say about innovation. What fintech players actually do — launches, funding, partnerships, and infrastructure moves.
 
-The radar watches eight search areas: neobank and digital bank launches, fintech funding and M&A, API economy and open banking, embedded finance and BNPL, crypto and stablecoin banking, AI-fintech patents and IP, RegTech and SupTech, and cross-border real-time payments. Each finding gets mapped to BIAN service domains, assessed through six innovation lenses, and ranked by signal strength — new, strengthening, or fading.
+The radar watches eight search areas: neobank and digital bank launches, fintech funding and M&A, API economy and open banking, embedded finance and BNPL, crypto and stablecoin banking, AI-fintech patents and IP, RegTech and SupTech, and cross-border real-time payments. Each finding gets mapped to fintech market segments, assessed through six innovation lenses, and ranked by signal strength — new, strengthening, or fading.
 
 The lenses are the point. Six questions that turn fintech signals into strategy:
 

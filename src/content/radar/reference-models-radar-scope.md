@@ -13,7 +13,7 @@ draft: false
 ---
 Every Tuesday at 18:00 UTC, a scheduled job scans the open web for banking reference models, data standards, and interoperability frameworks. Not what banks say about standards. Who is actually defining the rails the ecosystem runs on.
 
-The radar watches eight search areas: BIAN service landscape, FDX financial data exchange, ISO 20022 message definitions, Canada consumer-driven banking (CDB), global open banking standards (UK OBIE, EU PSD3, Australia CDR, Brazil, Singapore, Hong Kong), data models and semantics, interoperability and convergence, and adoption signals and certifications. Each finding gets mapped to BIAN service domains, assessed through six standards lenses, and ranked by signal strength — new, strengthening, or fading.
+The radar watches eight search areas: BIAN service landscape, FDX financial data exchange, ISO 20022 message definitions, Canada consumer-driven banking (CDB), global open banking standards (UK OBIE, EU PSD3, Australia CDR, Brazil, Singapore, Hong Kong), data models and semantics, interoperability and convergence, and adoption signals and certifications. Each finding gets mapped to reference model categories, assessed through six standards lenses, and ranked by signal strength — new, strengthening, or fading.
 
 The lenses are the point. Six questions that turn standards signals into strategy:
 
