@@ -12,9 +12,10 @@ export async function getStaticPaths() {
 }
 const { tag, items } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const ogImage = `${base}/og-image/tags-${tag}.png`;
 ---
 
-<Base title={`Tag: ${tag}`} description={`Items tagged ${tag}.`}>
+<Base title={`Tag: ${tag}`} description={`Items tagged ${tag}.`} image={ogImage}>
 	<section class="archive-head">
 		<h1 class="archive-title">#{tag}</h1>
 		<p class="archive-blurb">{items.length} item{items.length === 1 ? '' : 's'}.</p>

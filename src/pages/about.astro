@@ -1,9 +1,11 @@
 ---
 import Base from '../layouts/Base.astro';
 import { site } from '../config';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const ogImage = `${base}/og-image/about.png`;
 ---
 
-<Base title="About" narrow>
+<Base title="About" narrow image={ogImage}>
 	<section class="about-head">
 		<p class="meta-line">About</p>
 		<h1 class="about-title">A webmaster from 1998, still at it.</h1>

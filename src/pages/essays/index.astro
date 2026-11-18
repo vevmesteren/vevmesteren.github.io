@@ -3,9 +3,11 @@ import Base from '../../layouts/Base.astro';
 import PostList from '../../components/PostList.astro';
 import { getEssays } from '../../lib/posts';
 const posts = await getEssays();
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const ogImage = `${base}/og-image/essays.png`;
 ---
 
-<Base title="Essays" description="Long-form architecture and strategy. Take a coffee.">
+<Base title="Essays" description="Long-form architecture and strategy. Take a coffee." image={ogImage}>
 	<section class="archive-head">
 		<h1 class="archive-title">Essays</h1>
 		<p class="archive-blurb">Long-form architecture and strategy. Take a coffee.</p>

@@ -24,9 +24,10 @@ const ai = post.data.ai;
 const path = `${base}/blog/${post.id}/`;
 const kind = kindOf(post);
 const estReadingTime = readingTime(post.body);
+const ogImage = `${base}/og-image/blog/${post.id}.png`;
 ---
 
-<Base title={post.data.title} description={post.data.description} type="article" contentKind={kind} contentTags={post.data.tags} contentReadingTime={estReadingTime}>
+<Base title={post.data.title} description={post.data.description} image={ogImage} type="article" contentKind={kind} contentTags={post.data.tags} contentReadingTime={estReadingTime}>
 	<PostHeader post={post} number={number} />
 	<PostLayout takeaways={post.data.takeaways}>
 		<Content />

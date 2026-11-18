@@ -3,9 +3,10 @@ import Base from '../../layouts/Base.astro';
 import { getRadar, formatDate } from '../../lib/posts';
 const posts = await getRadar();
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const ogImage = `${base}/og-image/radar.png`;
 ---
 
-<Base title="Radar" description="Short, dated, sourced. What moved.">
+<Base title="Radar" description="Short, dated, sourced. What moved." image={ogImage}>
 	<section class="archive-head">
 		<h1 class="archive-title">Radar</h1>
 		<p class="archive-blurb">Short, dated, sourced. What moved.</p>

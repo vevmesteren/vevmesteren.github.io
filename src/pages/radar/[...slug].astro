@@ -17,9 +17,10 @@ const { Content } = await render(post);
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const path = `${base}/radar/${post.id}/`;
 const estReadingTime = readingTime(post.body);
+const ogImage = `${base}/og-image/radar/${post.id}.png`;
 ---
 
-<Base title={post.data.title} description={post.data.description} type="article" contentKind="radar" contentTags={post.data.tags} contentReadingTime={estReadingTime}>
+<Base title={post.data.title} description={post.data.description} image={ogImage} type="article" contentKind="radar" contentTags={post.data.tags} contentReadingTime={estReadingTime}>
 	<RadarLayout post={post} related={related}>
 		<Content />
 	</RadarLayout>
