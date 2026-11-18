@@ -25,12 +25,3 @@ Stablecoin custody went institutional. Deutsche Bank launched digital asset cust
 SWIFT transformed cross-border payments with tokenized value and real-time settlement. The RTP network is preparing for an international cross-border pilot in 2027. The architecture is converging: instant payment rails, stablecoin custody, and agent-ready payment APIs. When all three layers are in place, what remains strategically valuable is the trust infrastructure that makes agent-mediated banking safe — the deterministic layer with governed boundaries.
 
 The competitive advantage is shifting from product features to infrastructure control points. Wealthsimple built the full stack while the Big Six monitored. Pliant is building the agent-payment API layer, and Deutsche Bank is building the custody layer. The bank that controls the trust infrastructure for agent-mediated banking controls the relationship — regardless of who built the agent.
-
-## Sources
-
-1. 01 betakit.com https://betakit.com/canadas-long-awaited-real-time-rail-payments-system-launches-without-big-six-banks/
-2. 02 newsroom.wealthsimple.com https://newsroom.wealthsimple.com/wealthsimple-among-first-financial-institutions-to-bring-canadas-real-time-rail-to-market
-3. 03 getpliant.com https://www.getpliant.com/en-us/press/80-million-series-c
-4. 04 corporates.db.com https://corporates.db.com/more/latest-news/deutsche-bank-launches-digital-asset-custody-solution-for-institutional-and-corporate-clients
-5. 05 morningstar.com https://morningstar.com/news/business-wire/20261111924315/imprint-raises-130-million-to-help-brands-build-customer-loyalty-as-ai-reshapes-commerce
-6. 06 coindesk.com https://www.coindesk.com/business/2026/11/09/securitize-pushes-into-usd6-trillion-asset-backed-finance-market-with-river-one-acquisition

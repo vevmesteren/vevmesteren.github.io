@@ -23,10 +23,3 @@ Behind both deadlines, the international framework is hardening. The FSB finaliz
 The pattern is clear: AI governance is moving from voluntary frameworks to prescriptive obligations. The FSB provides the global benchmark. The OCC operationalizes it for US banks. OSFI will adopt within months. The strategy currently has no AI-specific supervisory expectations beyond high-level principles — a compliance gap that will widen as banks deploy agentic AI across operations.
 
 The strategic response is concrete. This week: draft the OSFI B-12 consultation response and establish an AI governance working group to map FSB and OCC expectations to BNC's existing framework. This month: update the regulatory alignment section to reference FSB sound practices and OCC SI, and establish a deadline-tracking process for regulatory consultations. The two active deadlines are the test case — if the strategy can't track and respond to a 60-day OSFI consultation, it can't track the larger wave coming behind it.
-
-## Sources
-
-1. 01 osfi-bsif.gc.ca https://www.osfi-bsif.gc.ca/en/guidance/guidance-library/draft-guideline-b-12-interest-rate-risk-management-2027-letter
-2. 02 occ.treas.gov https://occ.treas.gov/news-issuances/news-releases/2026/nr-occ-2026-97.html
-3. 03 fsb.org https://fsb.org/2026/10/fsb-finalises-sound-practices-for-the-responsible-adoption-of-artificial-intelligence-ai
-4. 04 fatf-gafi.org https://www.fatf-gafi.org/en/publications/Mutualevaluations/canada-mer-2026.html
