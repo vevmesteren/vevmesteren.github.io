@@ -2,8 +2,8 @@
 title: "ISO 20022 Hits November, BIAN Aligns, Canada Picks Its Standards"
 description: "Swift ISO 20022 structured-address cutover looms, Canada's CDB framework moves to implementation, FDX launches agentic AI initiative, BIAN v14.0 aligns with ISO 20022."
 date: 2026-11-18
-domain: banking
-tags: [radar, banking]
+domain: reference-models
+tags: [radar, reference-models]
 sources:
   - https://www.swift.com/insights/news/iso-20022-milestone-november-2026-unstructured-addresses-be-removed
   - https://www.swift.com/insights/news/swift-accepts-community-request-extend-structured-address-migration-iso-20022-payment-messages
