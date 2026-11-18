@@ -13,7 +13,7 @@ draft: false
 ---
 Every Tuesday at 15:00 UTC, a scheduled job scans the open web for software architecture and platform engineering signals. Not what vendors sell. What organizations actually build and deploy at scale.
 
-The radar watches seven search areas: microservices and service mesh, event-driven architecture, data architecture and data mesh, platform engineering and internal developer platforms, API design and governance, cloud-native and infrastructure-as-code, and system design at scale. Each finding gets mapped to BIAN service domains, assessed through six architecture lenses, and ranked by signal strength — new, strengthening, or fading.
+The radar watches seven search areas: microservices and service mesh, event-driven architecture, data architecture and data mesh, platform engineering and internal developer platforms, API design and governance, cloud-native and infrastructure-as-code, and system design at scale. Each finding gets mapped to architecture domains, assessed through six architecture lenses, and ranked by signal strength — new, strengthening, or fading.
 
 The lenses are the point. Six questions that turn architecture signals into strategy:
 
