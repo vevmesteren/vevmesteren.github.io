@@ -1,56 +1,54 @@
 ---
-title: "Regulatory Radar — Active Deadlines and AI Governance Shifts"
-description: "Two deadlines require attention: OSFI B-12 (Oct 27), OCC SI framework (Nov 4). AI governance advancing to prescriptive expectations."
+title: 'What the regulatory radar watches'
+description: 'The scope and strategy behind a weekly Monday scan for regulatory deadlines, enforcement actions, and consultation windows in banking.'
 date: 2026-11-18
 domain: regulatory
-tags: [radar, regulatory]
+tags: [regulatory-radar, banking, compliance, deadlines, enforcement, strategy]
 sources:
   - https://www.osfi-bsif.gc.ca/en/guidance/guidance-library/draft-guideline-b-12-interest-rate-risk-management-2027-letter
   - https://occ.treas.gov/news-issuances/news-releases/2026/nr-occ-2026-97.html
   - https://fsb.org/2026/10/fsb-finalises-sound-practices-for-the-responsible-adoption-of-artificial-intelligence-ai
+  - https://www.fatf-gafi.org/en/publications/Mutualevaluations/canada-mer-2026.html
 draft: false
 ---
+Every Monday at 14:00 UTC, a scheduled job scans regulatory bodies for deadlines, enforcement actions, and consultation windows. Not what regulators say about banking. What they do when supervisory expectations shift.
 
-# Regulatory Radar — Active Deadlines and AI Governance Shifts
+The radar watches seven regulatory bodies: OSFI and FCAC (Canada), EBA (EU), OCC (US), Payments Canada, HKMA (Hong Kong), and BIS/FSB (global). Each finding gets mapped to BIAN service domains, assessed through six regulatory lenses, and ranked by signal strength — new, strengthening, or fading.
 
-**Published:** 2026-11-18
+The lenses are the point. Six questions that turn regulatory signals into strategy:
 
-**Executive Summary**
+- **Deadline urgency**: which regulatory deadlines are approaching and need action this week?
+- **Enforcement posture**: what enforcement actions or penalties signal escalating supervisory expectations?
+- **Compliance gap**: where does the strategy's current regulatory alignment fall short of new expectations?
+- **Consultation window**: which consultations are open, closing, or require response?
+- **Cross-jurisdictional alignment**: how do international regulatory shifts affect Canadian expectations?
+- **Regulatory technology**: what new supervisory technologies or frameworks are regulators adopting?
 
-Two regulatory deadlines require immediate attention this week: OSFI B-12 interest rate risk management consultation closes Oct 27, and OCC's Super Intelligence framework takes effect Nov 4. International regulators are advancing AI governance from principles to prescriptive expectations, requiring proactive alignment ahead of OSFI implementation.
+The radar runs because reactive compliance is expensive. Proactive alignment catches the signals before they become enforcement actions. The scan catches the deadlines, consultations, and framework shifts that tell you which alignment work to do now.
 
-**Key Findings**
+## This week's signals — November 18, 2026
 
-1. **OSFI B-12 Interest Rate Risk Management (Active Deadline)**
-   - Consultation closes Oct 27, 2026
-   - 60-day public consultation launched Sept 16, 2026
-   - Canadian implication: BNC must submit technical response addressing IRRBB framework adequacy, macro stress testing, and capital implications
-   - Signal strength: 📈 Strengthening (second signal in 3 weeks)
+### 🔴 ACT NOW (2)
 
-2. **OCC Supervisory Framework on Super Intelligence (Effective Nov 4)**
-   - Framework finalized with specific supervisory expectations for bank SI deployment
-   - Canadian implication: OSFI typically adopts principles-aligned supervisory frameworks within 12 months
-   - Focus: Agentic AI governance, intent-anchored accountability, human-on-the-loop oversight
-   - Signal strength: 📈 NEW (first signal in 3 months)
+**1. OSFI B-12 Interest Rate Risk Management — Consultation closes Oct 27**
+Sixty-day public consultation launched Sept 16. BNC must submit technical response addressing IRRBB framework adequacy, macro stress testing, and capital implications. Signal: 📈 Strengthening (second signal in 3 weeks). 🇨🇦 DIRECT.
 
-3. **FSB AI Sound Practices (Finalized Oct 15)**
-   - 12 sound practices covering organisation-wide AI governance and AI lifecycle risk management
-   - Provides global benchmark for AI governance in financial institutions
-   - Canadian implication: BNC must align AI governance framework to FSB expectations before OSFI issues prescriptive guidance
-   - Signal strength: 📊 STABLE (definitive after consultation feedback period)
+**2. OCC Supervisory Framework on Super Intelligence — Effective Nov 4**
+Framework establishes supervisory expectations for bank SI deployment — agentic AI governance, intent-anchored accountability, human-on-the-loop oversight. OSFI typically adopts principles-aligned frameworks within 12 months. Signal: 📈 NEW. 🇨🇦 NEAR.
 
-**North Star Synthesis**
+### 🟡 WATCH (1)
 
-This week reveals a regulatory landscape moving from principles to implementation across AI governance, operational risk, and AML/CFT supervision. The two active deadline items demand immediate attention. The absence of deadline-tracking mechanisms and AI-specific supervisory expectations in the strategy creates incremental compliance gaps that will widen over the next 6-12 months.
+**3. FSB AI Sound Practices — Finalized Oct 15**
+Twelve sound practices covering organisation-wide AI governance and AI lifecycle risk management. BNC must align AI governance framework to FSB expectations before OSFI issues prescriptive guidance. Signal: 📊 STABLE. 🇨🇦 NEAR.
 
-**Strategic Response Required**
+### ⚪ CONTEXT (1)
 
-- **This Week:** Dispatch technical experts to draft OSFI B-12 consultation response; establish AI governance working group to map FSB/OCC expectations to BNC's existing AI framework
+**4. FATF Canada Mutual Evaluation — Published Sept 29**
+Canada in regular follow-up with 3-year roadmap of Key Recommended Actions to strengthen AML/CFT system effectiveness. Signal: 📊 STABLE. 🇨🇦 DIRECT.
 
-- **This Month:** Update regulatory alignment section to include FSB AI sound practices and OCC SI framework; establish deadline-tracking process for regulatory consultations and follow-up evaluations
+## Sources
 
-**Sources**
-
-- [OSFI Draft Guideline B-12 Interest Rate Risk Management](https://www.osfi-bsif.gc.ca/en/guidance/guidance-library/draft-guideline-b-12-interest-rate-risk-management-2027-letter)
-- [OCC Issues Supervisory Framework on Super Intelligence](https://occ.treas.gov/news-issuances/news-releases/2026/nr-occ-2026-97.html)
-- [FSB Finalises AI Sound Practices](https://fsb.org/2026/10/fsb-finalises-sound-practices-for-the-responsible-adoption-of-artificial-intelligence-ai)
+1. [OSFI Draft Guideline B-12](https://www.osfi-bsif.gc.ca/en/guidance/guidance-library/draft-guideline-b-12-interest-rate-risk-management-2027-letter)
+2. [OCC Super Intelligence Framework](https://occ.treas.gov/news-issuances/news-releases/2026/nr-occ-2026-97.html)
+3. [FSB AI Sound Practices](https://fsb.org/2026/10/fsb-finalises-sound-practices-for-the-responsible-adoption-of-artificial-intelligence-ai)
+4. [FATF Canada Mutual Evaluation](https://www.fatf-gafi.org/en/publications/Mutualevaluations/canada-mer-2026.html)
