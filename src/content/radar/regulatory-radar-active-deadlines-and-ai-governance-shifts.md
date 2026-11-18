@@ -1,5 +1,5 @@
 ---
-title: 'What the regulatory radar watches'
+title: "Regulatory Radar — Active Deadlines and AI Governance Shifts"
 description: 'The scope and strategy behind a weekly Monday scan for regulatory deadlines, enforcement actions, and consultation windows in banking.'
 date: 2026-11-18
 domain: regulatory
