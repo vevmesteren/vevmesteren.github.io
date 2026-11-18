@@ -8,7 +8,7 @@ ai: { tldr: true, askAuthor: true, translate: true, quiz: false, readNext: true 
 ---
 I have an AI agent that helps me think.
 
-It produces research synthesis, architecture documents, plans — the kind of structured output that demands careful reading. Not skimming. Not scanning. Reading with a pen in hand, circling the important parts, crossing out the wrong ones, writing in the margins.
+It produces research synthesis, architecture documents, plans. The kind of structured output that demands careful reading. Not skimming. Not scanning. Reading with a pen in hand, circling the important parts, crossing out the wrong ones, writing in the margins.
 
 So I built a round-trip.
 
@@ -34,25 +34,25 @@ graph LR
 
 The interesting thing isn't the individual pieces. AI agents produce documents. reMarkable tablets display them. Vision LLMs transcribe handwriting. Each of these is unremarkable on its own.
 
-What's remarkable — pun intended — is the meeting point.
+What's remarkable (pun intended) is the meeting point.
 
-On one side: the most cutting-edge capabilities in software. Agent orchestration that can produce a 4,000-word architecture document with embedded mermaid diagrams in seconds. Vision models that can read cursive handwriting from a 300 DPI photograph of an e-ink screen.
+On one side: the most advanced capabilities in software. Agent orchestration that can produce a 4,000-word architecture document with embedded mermaid diagrams in seconds. Vision models that can read cursive handwriting from a 300 DPI photograph of an e-ink screen.
 
-On the other side: the oldest technology humans have for thinking. Pen and paper. Marking up a document the way scholars have marked up manuscripts for a thousand years — circling, crossing out, writing between the lines.
+On the other side: the oldest technology humans have for thinking. Pen and paper. Marking up a document the way scholars have marked up manuscripts for a thousand years, circling, crossing out, writing between the lines.
 
 The round-trip makes these two worlds talk to each other. The agent produces, the human annotates, the agent reads the handwriting back. The technology disappears into the background. What's left is a person thinking on paper and a machine that can read it.
 
 ## The Original Topology
 
-The [reMarkable Roundtrip](https://github.com/vevmesteren/remarkable-roundtrip) project started here — as a Hermes Agent skill that published documents to the reMarkable and pulled handwriting back. No Obsidian, no plugin, no GUI. Just the agent, the CLI, and the tablet.
+The [reMarkable Roundtrip](https://github.com/vevmesteren/remarkable-roundtrip) project started here, as a Hermes Agent skill that published documents to the reMarkable and pulled handwriting back. No Obsidian, no plugin, no GUI. Just the agent, the CLI, and the tablet.
 
-Then I extracted it into an open-source Python package and built an Obsidian plugin on top — because most people who use reMarkable tablets also use Obsidian, and they want a button in their vault, not a terminal command. [That story is told elsewhere](/blog/remarkable-roundtrip/).
+Then I extracted it into an open-source Python package and built an Obsidian plugin on top, because most people who use reMarkable tablets also use Obsidian, and they want a button in their vault, not a terminal command. [That story is told elsewhere](/blog/remarkable-roundtrip/).
 
-But the agent topology — what I now call **T-AGENT** — is the original. It's the one I use every day. And with [release 0.2.0](https://github.com/vevmesteren/remarkable-roundtrip/releases/tag/0.2.0), it's first-class in the README, with its own topology entry alongside the Obsidian plugin topologies.
+But the agent topology, what I now call **T-AGENT**, is the original. It's the one I use every day. And with [release 0.2.0](https://github.com/vevmesteren/remarkable-roundtrip/releases/tag/0.2.0), it's first-class in the README, with its own topology entry alongside the Obsidian plugin topologies.
 
 ## The Capability Brief
 
-Here's what you paste into your AI harness — Hermes, Claude, Cursor, whatever agent can run shell commands — to install and operationalize the round-trip. No Obsidian required.
+Here's what you paste into your AI harness (Hermes, Claude, Cursor, whatever agent can run shell commands) to install and operationalize the round-trip. No Obsidian required.
 
 ```
 # reMarkable Roundtrip — Agent Capability
@@ -97,7 +97,7 @@ That's it. Four install commands, three protocol rules, and you're round-trippin
 
 ## Why This Matters
 
-I work at a bank. I lead a tech factory. I spend my days in meetings, in documents, in architecture reviews. The tools that demand my sharpest thinking are the ones that produce the densest output — strategy documents, system designs, research synthesis.
+I work at a bank. I lead a tech factory. I spend my days in meetings, in documents, in architecture reviews. The tools that demand my sharpest thinking are the ones that produce the densest output: strategy documents, system designs, research synthesis.
 
 I don't want to read those on a screen with 47 tabs open and Slack buzzing. I want to read them the way I read everything that matters: on paper, with a pen, in the quiet.
 

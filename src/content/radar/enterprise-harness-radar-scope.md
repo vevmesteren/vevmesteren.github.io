@@ -13,13 +13,13 @@ draft: false
 ---
 Every Tuesday, a scheduled job scans the open web for signals in enterprise agent harness engineering. Not what vendors sell. What organizations need to make autonomous agents coherent at scale.
 
-The radar watches the four-layer stack the market is converging on: prompt engineering, context engineering, intent engineering, and specification engineering. Each layer has its own failure modes, its own maturity curve, and its own architectural primitives. The radar tracks where the state of the art actually is — not where the marketing says it is.
+The radar watches the four-layer stack the market is converging on: prompt engineering, context engineering, intent engineering, and specification engineering. Each layer has its own failure modes, its own maturity curve, and its own architectural primitives. The radar tracks where the state of the art actually is, not where the marketing says it is.
 
 The strategy is structural. Three questions run through every finding:
 
-- **What breaks at scale?** 65% of enterprise AI failures trace to harness defects — context drift, schema misalignment, state degradation — not model capability. The harness, not the model, is where production-grade agent systems live or die.
+- **What breaks at scale?** 65% of enterprise AI failures trace to harness defects (context drift, schema misalignment, state degradation), not model capability. The harness, not the model, is where production-grade agent systems live or die.
 - **Who controls the intent?** The distinction between AI that fails and AI that succeeds at the wrong thing is the most important unsolved problem in enterprise AI. Intent engineering is the layer where strategy becomes agent-actionable, and nobody owns the translation.
-- **Where is the governance?** 98% of assessed agents exhibit the lethal trifecta pattern. 54% of deployments hit significant incidents within 90 days. The governance layer is the least mature and the highest-leverage. Value stream maps and capability maps are being recast from static documentation into active control planes — policy-as-code embedded in API gateways that can govern 10,000 agents without reviewing a single line of code.
+- **Where is the governance?** 98% of assessed agents exhibit the lethal trifecta pattern. 54% of deployments hit significant incidents within 90 days. The governance layer is the least mature and the highest-leverage. Value stream maps and capability maps are being recast from static documentation into active control planes, with policy-as-code embedded in API gateways that can govern 10,000 agents without reviewing a single line of code.
 
 The radar runs because the gap between "build agents" and "build the architecture that makes agents coherent" is where enterprise value lives. The scan catches the signals that tell you which architecture is worth building.
 

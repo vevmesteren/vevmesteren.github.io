@@ -16,7 +16,7 @@ sources:
 draft: false
 ---
 
-Agentic AI is now live in banking compliance. Arva AI closed a $20M Series A this week with deployments at a top-10 U.S. bank, Wise, and an S&P 500 payments institution, claiming 92% automation of financial crime reviews. making this production rather than a pilot. For Canadian banks facing the same AML cost pressure, the build-vs-partner question on compliance agents has effectively been answered by the market: partner.
+Agentic AI is now live in banking compliance. Arva AI closed a $20M Series A this week with deployments at a top-10 U.S. bank, Wise, and an S&P 500 payments institution, claiming 92% automation of financial crime reviews. That makes this production rather than a pilot. For Canadian banks facing the same AML cost pressure, the build-vs-partner question on compliance agents has effectively been answered by the market: partner.
 
 Stablecoin infrastructure crossed an institutional threshold. Deutsche Bank went live with crypto custody for BTC, ETH, USDC, and EURC under MiCA across 30 EEA countries. Coinbase received a federal trust charter and PNC Bank began piloting USDC payments for corporate clients. Fed Governor Waller endorsed tokenized settlement, proposing "skinny" master accounts for fintech firms, and the infrastructure layer is becoming bank-grade globally.
 
@@ -24,7 +24,7 @@ In Canada, two regulatory deadlines are converging. Real-time rail launched on N
 
 Wealthsimple launched an AI assistant that can make transfers, pay bills, and place trades, alongside access to CADD, a Canadian-dollar stablecoin. It is the Canadian proof case for the thesis that banking products are commoditizing while the agent interface becomes the competitive layer. Nigerian fintech Rex Africa launched an AI-native bank built agent-first around a conversational financial agent, a design reference for what a new entrant could build in Canada.
 
-Funding signals reinforced the trajectory. Pliant raised $80M Series C with explicit expansion into the U.S. and Canada, positioning its B2B payment platform for AI agents connecting directly to financial infrastructure. Imprint reached a $1.9B valuation for AI-powered co-branded credit cards. and Griffin raised $20M to add cards and stablecoin services to its agentic banking platform.
+Funding signals reinforced the trajectory. Pliant raised $80M Series C with explicit expansion into the U.S. and Canada, positioning its B2B payment platform for AI agents connecting directly to financial infrastructure. Imprint reached a $1.9B valuation for AI-powered co-branded credit cards. Griffin raised $20M to add cards and stablecoin services to its agentic banking platform.
 
 Fed Governor Barr warned that AI agents could accelerate bank runs by detecting yield gaps and moving funds in minutes. Major banks are already encountering AI agents attempting to act in retail accounts without verifiable consent. The agent-as-interface scenario is no longer hypothetical; the risk infrastructure needs to be built now.
 

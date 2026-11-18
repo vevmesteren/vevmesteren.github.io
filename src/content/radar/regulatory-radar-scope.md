@@ -13,7 +13,7 @@ draft: false
 ---
 Every Monday at 14:00 UTC, a scheduled job scans regulatory bodies for deadlines, enforcement actions, and consultation windows. Not what regulators say about banking. What they do when supervisory expectations shift.
 
-The radar watches seven regulatory bodies: OSFI and FCAC (Canada), EBA (EU), OCC (US), Payments Canada, HKMA (Hong Kong), and BIS/FSB (global). Each finding gets mapped to regulatory frameworks, assessed through six regulatory lenses, and ranked by signal strength — new, strengthening, or fading.
+The radar watches seven regulatory bodies: OSFI and FCAC (Canada), EBA (EU), OCC (US), Payments Canada, HKMA (Hong Kong), and BIS/FSB (global). Each finding gets mapped to regulatory frameworks, assessed through six regulatory lenses, and ranked by signal strength: new, strengthening, or fading.
 
 The lenses are the point. Six questions that turn regulatory signals into strategy:
 

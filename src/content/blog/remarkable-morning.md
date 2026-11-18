@@ -6,7 +6,7 @@ kind: workshop
 tags: [remarkable, python, pipeline, ai]
 ai: { tldr: true, askAuthor: true, translate: true, quiz: false, readNext: true }
 ---
-Every morning, I would open my laptop and check the news. The Guardian, BBC, CBC, Der Spiegel, Le Figaro — I'd bounce between sites across three languages, skim headlines, open tabs, and try to get a sense of what mattered before my coffee got cold. It was inconsistent, time-consuming, and the reading experience on a screen was worse than what I had on my desk: a reMarkable Paper Pro.
+Every morning, I would open my laptop and check the news. The Guardian, BBC, CBC, Der Spiegel, Le Figaro. I'd bounce between sites across three languages, skim headlines, open tabs, and try to get a sense of what mattered before my coffee got cold. It was inconsistent, time-consuming, and the reading experience on a screen was worse than what I had on my desk: a reMarkable Paper Pro.
 
 The reMarkable was paired and ready. It had no built-in news pipeline. So I built one.
 
@@ -20,7 +20,7 @@ The outcome I wanted was specific: a Python pipeline that runs at 05:30 EDT dail
 
 ## Architecture: A Seven-Stage Pipeline
 
-The design is deliberately straightforward — a linear pipeline where each stage has one job, logs its timing, and fails gracefully:
+The design is deliberately straightforward, a linear pipeline where each stage has one job, logs its timing, and fails gracefully:
 
 ```
 feeds.yaml → Fetch → Extract → Curate → EPUB → Upload → Cleanup
@@ -36,13 +36,13 @@ graph LR
     Upload --> Cleanup["6. Cleanup<br/>trash files > 7 days"]
 ```
 
-**Stage 1 — Fetch.** Two source types: RSS feeds via `feedparser` and the Guardian Content API via `httpx`. Each source is independent — one broken feed logs an error and gets skipped, not fatal to the whole pipeline. This matters because feeds break constantly.
+**Stage 1 — Fetch.** Two source types: RSS feeds via `feedparser` and the Guardian Content API via `httpx`. Each source is independent: one broken feed logs an error and gets skipped, not fatal to the whole pipeline. This matters because feeds break constantly.
 
 **Stage 2 — Extract.** `trafilatura` does the heavy lifting: takes raw HTML and extracts the article body text, stripping navigation, ads, and boilerplate. This is where the first real-world problems showed up.
 
-**Stage 3 — Curate.** A single LLM call to OpenRouter. The pipeline sends only article metadata — title, source, URL, language, first 200 words — never the full body text. The LLM deduplicates stories across sources, assigns categories, and writes a 3-5 sentence morning briefing. This is the intelligence layer: it's what turns 80-120 raw articles into 15-25 curated ones.
+**Stage 3 — Curate.** A single LLM call to OpenRouter. The pipeline sends only article metadata (title, source, URL, language, first 200 words), never the full body text. The LLM deduplicates stories across sources, assigns categories, and writes a 3-5 sentence morning briefing. This is the intelligence layer: it's what turns 80-120 raw articles into 15-25 curated ones.
 
-**Stage 4 — EPUB assembly.** `ebooklib` builds a reflowable EPUB with a cover page (title, date, briefing, source counts, table of contents by category), one chapter per article, and source URL footers. Reflowable is the key word — the reMarkable's e-ink display lets you adjust font size, and a fixed-layout PDF would defeat the purpose.
+**Stage 4 — EPUB assembly.** `ebooklib` builds a reflowable EPUB with a cover page (title, date, briefing, source counts, table of contents by category), one chapter per article, and source URL footers. Reflowable is the key word. The reMarkable's e-ink display lets you adjust font size, and a fixed-layout PDF would defeat the purpose.
 
 **Stage 5 — Upload.** `rmapi put` pushes the EPUB to `/News/` on the reMarkable cloud, which syncs to the tablet.
 
@@ -54,25 +54,25 @@ A pipeline that fetches 19 real-world news sources is a pipeline that will break
 
 ### The Anti-Scraping Ghost ([#3](https://github.com/vevmesteren/remarkable-morning/issues/3))
 
-Sifted, a European fintech publication, uses JavaScript-based anti-scraping that renders a clean first sentence for SEO crawlers, then scrambles the rest of the article body with character substitution. `trafilatura` extracts the scrambled text faithfully — it's doing its job. The result reads like a cipher.
+Sifted, a European fintech publication, uses JavaScript-based anti-scraping that renders a clean first sentence for SEO crawlers, then scrambles the rest of the article body with character substitution. `trafilatura` extracts the scrambled text faithfully. It's doing its job. The result reads like a cipher.
 
-I added a gibberish detector that flags articles with unusual character distributions, but that just turned scrambled text into `[Article text unavailable]`. A reader seeing that in their morning digest loses trust in the whole pipeline. The fix wasn't better detection — it was removing the source. Sifted articles will never have readable body text without a headless browser, and a headless browser is too heavy for a daily pipeline that runs in seconds.
+I added a gibberish detector that flags articles with unusual character distributions, but that just turned scrambled text into `[Article text unavailable]`. A reader seeing that in their morning digest loses trust in the whole pipeline. The fix wasn't better detection. It was removing the source. Sifted articles will never have readable body text without a headless browser, and a headless browser is too heavy for a daily pipeline that runs in seconds.
 
 The gibberish detector stayed as a safety net for other sources. But the lesson was clear: **don't build detection for problems you can eliminate by removing the source.**
 
 ### The Video Player Impostor ([#12](https://github.com/vevmesteren/remarkable-morning/issues/12))
 
-France 24 publishes video segments as RSS entries. These pages have no article text — just a video player. But `trafilatura` extracts the video player's error message: *"Une extension de votre navigateur semble bloquer le chargement du lecteur vidéo..."* — which reads as clean French and passes the gibberish detector because it IS clean text. It's just not journalism.
+France 24 publishes video segments as RSS entries. These pages have no article text, just a video player. But `trafilatura` extracts the video player's error message: *"Une extension de votre navigateur semble bloquer le chargement du lecteur vidéo..."* — which reads as clean French and passes the gibberish detector because it IS clean text. It's just not journalism.
 
 The LLM then curates it based on the headline. A story about a banking crisis in Paraguay shows up in the digest with a video player error as the body.
 
-The fix was an `_is_article_text()` check alongside the gibberish detector: reject text below a minimum word count and match known non-article patterns (video player messages, cookie notices, paywall text) across all three languages. The key design decision: **don't remove France 24 from feeds** — the source has excellent text articles too, just not the video-only ones. Filter at the extraction layer, not the source layer.
+The fix was an `_is_article_text()` check alongside the gibberish detector: reject text below a minimum word count and match known non-article patterns (video player messages, cookie notices, paywall text) across all three languages. The key design decision: **don't remove France 24 from feeds**. The source has excellent text articles too, just not the video-only ones. Filter at the extraction layer, not the source layer.
 
 ### The Blocking C Call ([git log](https://github.com/vevmesteren/remarkable-morning/commit/eb2387c))
 
-`trafilatura.fetch_url` is a blocking C call that ignores `SIGALRM`. When a URL hangs, the pipeline hangs. Python's `signal.alarm()` can't interrupt it because the signal never reaches the Python layer.
+`trafilatura.fetch_url` is a blocking C call that ignores `SIGALRM`. When a URL hangs, the pipeline hangs. Python's `signal.alarm()` can't interrupt it because the signal never reaches the Python level.
 
-The fix: run `fetch_url` in a subprocess with `subprocess.run(timeout=15)`. If the subprocess doesn't return in 15 seconds, it gets killed. The parent process never blocks. This is a classic Python gotcha — C extensions that do I/O without releasing the GIL are immune to signal-based timeouts.
+The fix: run `fetch_url` in a subprocess with `subprocess.run(timeout=15)`. If the subprocess doesn't return in 15 seconds, it gets killed. The parent process never blocks. This is a classic Python gotcha. C extensions that do I/O without releasing the GIL are immune to signal-based timeouts.
 
 ## The Curation Layer: What the LLM Actually Does
 
@@ -86,7 +86,7 @@ The curation prompt is the most important design decision in the pipeline. Here'
 
 4. **Source diversity:** No more than N articles from any single source (configurable via `max_per_source`).
 
-The LLM doesn't see body text — only metadata and the first 200 words. This keeps the token cost down and forces the model to make curation decisions based on what matters: the headline, the source, and the lede.
+The LLM doesn't see body text, only metadata and the first 200 words. This keeps the token cost down and forces the model to make curation decisions based on what matters: the headline, the source, and the lede.
 
 But LLMs miss duplicates. So there's a fallback dedup layer: `SequenceMatcher` compares normalized titles with a 0.85 similarity threshold. If two titles are 85% similar (after lowercasing, stripping punctuation, and collapsing whitespace), the second one gets dropped and its source gets added to the first one's `also_covered_by` list. This catches what the LLM misses without paying for a second LLM call.
 

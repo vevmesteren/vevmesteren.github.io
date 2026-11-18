@@ -16,15 +16,15 @@ So I built the round-trip.
 
 ## The Origin Story
 
-The code started life as a Hermes Agent skill — `veviki-remarkable-bridge` — tightly coupled to my personal AI assistant's environment. It worked. I'd been using it daily: publish a strategy document to the reMarkable, read it on e-ink, mark it up with a pen, pull the annotations back into the vault. The round-trip was proven.
+The code started life as a Hermes Agent skill, `veviki-remarkable-bridge`, tightly coupled to my personal AI assistant's environment. It worked. I'd been using it daily: publish a strategy document to the reMarkable, read it on e-ink, mark it up with a pen, pull the annotations back into the vault. The round-trip was proven.
 
-But it was coupled to my infrastructure: hardcoded paths, a specific vision model, weasyprint for PDF generation (which requires GTK/Pango system libraries — a nightmare on Windows). Nobody else could use it.
+But it was coupled to my infrastructure: hardcoded paths, a specific vision model, weasyprint for PDF generation (which requires GTK/Pango system libraries, a nightmare on Windows). Nobody else could use it.
 
 The [first issue](https://github.com/vevmesteren/remarkable-roundtrip/issues/1) I opened when extracting it to open source was explicit:
 
 > Build the `obsidian-rm-bridge` Python package (v0.1.0) from the architecture in `docs/ARCHITECTURE.md`. This is a refactor + decoupling of proven code, not a greenfield rewrite.
 
-That distinction matters. This wasn't a from-scratch build — it was taking code that worked in production (my daily workflow) and making it portable.
+That distinction matters. This wasn't a from-scratch build. It was taking code that worked in production (my daily workflow) and making it portable.
 
 ## Architecture: Two Pipelines, One Round-Trip
 
@@ -91,11 +91,11 @@ The [architecture document](https://github.com/vevmesteren/remarkable-roundtrip/
 
 ### Phase 1-3: Prove the Round-Trip (Nov 12)
 
-The first three phases were built as a Hermes Agent skill in a single day. Publish worked. Retrieve worked. The vision model (GLM-4.5V) transcribed handwritten annotations accurately. This was the PoC — it proved the concept before any architecture was written.
+The first three phases were built as a Hermes Agent skill in a single day. Publish worked. Retrieve worked. The vision model (GLM-4.5V) transcribed handwritten annotations accurately. This was the PoC. It proved the concept before any architecture was written.
 
 ### Phase 4: Open Source Extraction (Nov 12)
 
-[Issue #1](https://github.com/vevmesteren/remarkable-roundtrip/issues/1) — Extract the skill into a standalone pip package. The design contracts were explicit:
+[Issue #1](https://github.com/vevmesteren/remarkable-roundtrip/issues/1). Extract the skill into a standalone pip package. The design contracts were explicit:
 
 - **DC-1:** Playwright is the sole rendering engine (no weasyprint, no mmdc)
 - **DC-3:** Config via TOML + env vars, never hardcoded paths
@@ -106,15 +106,15 @@ The result: `pip install remarkable-roundtrip` → `ormb setup` → `ormb pair` 
 
 ### Phase 5a: The Obsidian Plugin (Nov 13)
 
-[Issue #6](https://github.com/vevmesteren/remarkable-roundtrip/issues/6) — Build a thin TypeScript Obsidian plugin that wraps the `ormb` CLI via `child_process.execFile`.
+[Issue #6](https://github.com/vevmesteren/remarkable-roundtrip/issues/6). Build a thin TypeScript Obsidian plugin that wraps the `ormb` CLI via `child_process.execFile`.
 
 The architecture decision here was important: **the plugin is a thin wrapper, not a reimplementation.** All logic stays in the Python CLI. The plugin is ~200-300 lines of TypeScript that calls `ormb` as a subprocess, parses the JSON output, and displays progress in the Obsidian UI.
 
-This drove a [prerequisite issue](https://github.com/vevmesteren/remarkable-roundtrip/issues/7) — the CLI needed a machine-readable JSON envelope output mode, `--vault` containment for path safety, a `doctor` command for diagnostics, and `set-key` via stdin (so the API key never appears in process arguments). These were [Phase 5a-0](https://github.com/vevmesteren/remarkable-roundtrip/issues/7), built before the plugin itself.
+This drove a [prerequisite issue](https://github.com/vevmesteren/remarkable-roundtrip/issues/7): the CLI needed a machine-readable JSON envelope output mode, `--vault` containment for path safety, a `doctor` command for diagnostics, and `set-key` via stdin (so the API key never appears in process arguments). These were [Phase 5a-0](https://github.com/vevmesteren/remarkable-roundtrip/issues/7), built before the plugin itself.
 
 ### Phase 5b: Pull Annotations + Marker Blocks (Nov 13)
 
-[Issue #11](https://github.com/vevmesteren/remarkable-roundtrip/issues/11) — The pull command and marker blocks. When you publish a document, the plugin inserts a marker block into the markdown:
+[Issue #11](https://github.com/vevmesteren/remarkable-roundtrip/issues/11). The pull command and marker blocks. When you publish a document, the plugin inserts a marker block into the markdown:
 
 ```markdown
 <!-- RM-BRIDGE:published:doc_id:1234:page_count:5 -->
@@ -122,11 +122,11 @@ This drove a [prerequisite issue](https://github.com/vevmesteren/remarkable-roun
 
 When you pull annotations, the plugin finds this marker, knows which reMarkable document corresponds to this note, and appends the transcribed annotations below it. No manual document ID tracking.
 
-This phase was broken into five incremental changes ([#12-16](https://github.com/vevmesteren/remarkable-roundtrip/issues/12)), each one a focused, independently testable unit — from `strip_marker_blocks` in utils.py to the TypeScript pull command with confirmation modal.
+This phase was broken into five incremental changes ([#12-16](https://github.com/vevmesteren/remarkable-roundtrip/issues/12)), each one a focused, independently testable unit, from `strip_marker_blocks` in utils.py to the TypeScript pull command with confirmation modal.
 
 ### Phase 5c: The Cost Controller (Nov 14-15)
 
-[Issue #25](https://github.com/vevmesteren/remarkable-roundtrip/issues/25) — The most important issue you've never heard of.
+[Issue #25](https://github.com/vevmesteren/remarkable-roundtrip/issues/25). The most important issue you've never heard of.
 
 Every `ormb pull` was running the full vision pipeline: download PDF → render PNGs → send to vision LLM → transcribe. The problem: if you pull the same document twice and your annotations haven't changed, you pay for the vision API call twice.
 
@@ -143,7 +143,7 @@ The fix: hash the downloaded PDF with SHA-256. Cache `{pdf_hash: transcription_r
 
 The delivery philosophy was: **prove it works in production, then extract and generalize.** Not the other way around.
 
-The original Hermes skill was built in a day (Phases 1-3). It was ugly — hardcoded paths, a single vision model, GTK dependencies. But it worked. I used it every day. I published strategy documents to the reMarkable, annotated them, and pulled the handwriting back into my knowledge base.
+The original Hermes skill was built in a day (Phases 1-3). It was ugly: hardcoded paths, a single vision model, GTK dependencies. But it worked. I used it every day. I published strategy documents to the reMarkable, annotated them, and pulled the handwriting back into my knowledge base.
 
 Only after the round-trip was proven did I write the architecture document, identify the coupling points, and start the extraction. This matters because:
 

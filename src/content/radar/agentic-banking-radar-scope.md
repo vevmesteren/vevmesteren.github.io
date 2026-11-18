@@ -13,7 +13,7 @@ draft: false
 ---
 Every Monday morning, a scheduled job scans the open web for signals where AI agents start acting in banking. Not what banks say about AI. What they do when agents show up.
 
-The radar watches five search areas: agentic banking and AI-native bank architecture, fintech competitive moves and neobank innovation, payments and rail modernization, customer trust and deposit competition, and regulatory shifts. Each finding gets mapped to BIAN service domains, assessed through six strategic lenses, and tagged by signal strength — new, strengthening, or fading.
+The radar watches five search areas: agentic banking and AI-native bank architecture, fintech competitive moves and neobank innovation, payments and rail modernization, customer trust and deposit competition, and regulatory shifts. Each finding gets mapped to BIAN service domains, assessed through six strategic lenses, and tagged by signal strength: new, strengthening, or fading.
 
 The lenses are the point. Six questions that turn news into strategy:
 
