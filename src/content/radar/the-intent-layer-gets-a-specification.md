@@ -22,15 +22,15 @@ draft: false
 
 Canada's Real-Time Rail went live on November 9. No Big Six bank joined the launch cohort. Wealthsimple is the largest Canadian participant, and it now controls three layers at once: the AI assistant (Penny), the yield-bearing deposit (CADD), and the payment rail (RTR). The national payment infrastructure is a utility layer that makes settlement speed a commodity. What remains valuable is the trust infrastructure that makes agent-mediated payments safe.
 
-That question, what stays valuable when products are commodities and the interface is an agent the bank does not control, is the one the strategy document keeps asking. This week's radar signals give it three new pieces of evidence.
+That question — what stays valuable when products are commodities and the interface is an agent the bank does not control — is the one every bank's architecture roadmap must answer. This week's radar signals give it three new pieces of evidence.
 
 ## The RTR gap is dated
 
-Payments Canada launched the Real-Time Rail with eight initial participants. No Big Six bank is among them. The rollout is phased: Q1 2027 for Interac e-Transfer migration, Q2 for additional participants, Q3 for full transaction volumes. Wealthsimple built the agent, the stablecoin, and the rail connection at the same time. The strategy document's Workstream D, which covers external-agent participation, now has an infrastructure dependency it did not have last week.
+Payments Canada launched the Real-Time Rail with eight initial participants. No Big Six bank is among them. The rollout is phased: Q1 2027 for Interac e-Transfer migration, Q2 for additional participants, Q3 for full transaction volumes. Wealthsimple built the agent, the stablecoin, and the rail connection at the same time. Any bank building external-agent participation now has an infrastructure dependency it did not have last week: the rail its agents settle on is controlled by a competitor.
 
 ## The EBA defines terms for the agent-ready bank
 
-The Euro Banking Association's Open Finance Working Group published terms of engagement for "The Agent-Ready Bank" in October 2026. The document defines what happens when the customer's entry point is an independent AI agent rather than a bank channel. Banks become candidates competing for algorithmic selection. The working group is non-binding and is an industry body, not a regulator. Its terms may become an interoperability standard. The strategy document's authority continuum assumes the Bank controls the entry point. The EBA is now defining terms for the case where the Bank does not.
+The Euro Banking Association's Open Finance Working Group published terms of engagement for "The Agent-Ready Bank" in October 2026. The document defines what happens when the customer's entry point is an independent AI agent rather than a bank channel. Banks become candidates competing for algorithmic selection. The working group is non-binding and is an industry body, not a regulator. Its terms may become an interoperability standard. Most banks' authority frameworks assume they control the entry point. The EBA is now defining terms for the case where they do not.
 
 ## The OCC framework and the 12-18 month lag
 
@@ -38,7 +38,7 @@ The OCC issued a supervisory framework for bank use of generative and agentic AI
 
 ## Permission and intent are not the same axis
 
-Maya Dotan decomposed "intent" in agentic commerce into two separate questions. Permission asks whether the purchase stayed inside what the user approved. Intent asks whether the agent got the user what they actually wanted. The card networks are building the record layer for permission (Visa purchase instructions, Mastercard Verifiable Intent, EMVCo Intent Services). The liability rule, who bears the loss when an agent goes outside approved conditions, does not exist yet. Visa's benchmark data: 22 AI models passed 57.2% of shopping test runs. The strategy document's authority continuum treats permission and intent as aligned. They are not.
+Maya Dotan decomposed "intent" in agentic commerce into two separate questions. Permission asks whether the purchase stayed inside what the user approved. Intent asks whether the agent got the user what they actually wanted. The card networks are building the record layer for permission (Visa purchase instructions, Mastercard Verifiable Intent, EMVCo Intent Services). The liability rule, who bears the loss when an agent goes outside approved conditions, does not exist yet. Visa's benchmark data: 22 AI models passed 57.2% of shopping test runs. Most authority frameworks treat permission and intent as aligned. They are not.
 
 ## The intent layer gets a formal specification
 
@@ -50,7 +50,7 @@ A LangChain A2A pipeline entered an undetected feedback loop that ran 264 hours 
 
 ## What the review proposes
 
-Eight patches to the strategy document, all validated against the HTML for old_string uniqueness, employer-safety, and US-only constructs. The top five:
+This week's review proposes eight architecture observations for any bank navigating the same landscape. The top five:
 
 1. RTR payment infrastructure gap, dated observation in Chapter 5
 2. OCC framework as non-binding US comparative signal in regulatory depth
@@ -58,6 +58,4 @@ Eight patches to the strategy document, all validated against the HTML for old_s
 4. Harness engineering evidence (88% failure, $47K postmortem, 15% scaled) in depth-risk
 5. Commoditization boundary and reference architecture options (WSO2, Bain, McKinsey) as merged patch in architecture thesis
 
-Three additional patches cover permission vs intent in the authority continuum, intent-layer failure modes in the specification capability table, and process-preparedness as a Bank-readiness gate dimension.
-
-Full proposal: veviki-valentin/concepts/strategy/agentic-banking-strategy/patches/2026/11/2026-11-18-review.md
+Three additional observations cover permission vs intent in the authority continuum, intent-layer failure modes in the specification capability table, and process-preparedness as a readiness gate dimension.
