@@ -83,11 +83,9 @@ Failure cascades silently. When the research profile goes down, the build agent 
 
 The schema is too loose. A field that says "findings" can contain anything. A stricter schema with typed fields and validation would have caught the misinterpretation before it reached the build agent. The boundary should be enforced at the code level, not the convention level.
 
-## What I'd Do Differently
+## What I'll Build Next
 
-One thing, in order of regret.
-
-I'd build the heartbeat before the first handoff. I lost two hours to a silent failure because nobody was watching. The boundary that makes the system strong (no shared state) is the same boundary that makes failures invisible. You need a channel that carries only presence, not content.
+The heartbeat before the first handoff. I lost two hours to a silent failure because nobody was watching. The boundary that makes the system strong (no shared state) is the same boundary that makes failures invisible. You need a channel that carries only presence, not content.
 
 The stricter schema I mentioned above is the second fix. Validation at the boundary, not at the convention. The spec should be a contract, not a suggestion.
 
