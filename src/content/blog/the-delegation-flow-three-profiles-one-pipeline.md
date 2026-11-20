@@ -9,7 +9,7 @@ draft: false
 
 # The Delegation Flow: Three Profiles, One Pipeline
 
-I run three AI agent profiles. They don't share state. They don't share memory. They don't even run on the same model. That's the point.
+I run three Hermes agent profiles. Each profile regroups multiple context-specific sub-agents. They don't share state. They don't share memory. They don't even run on the same model — and even within a profile, different task types route to different models through a pinned task↔model matrix. That's the point.
 
 One orchestrates. One researches. One builds. Each has its own skills, its own cron jobs, its own context window. They communicate through structured handoffs: JSON files in a shared inbox.
 
@@ -25,6 +25,8 @@ A generalist optimizes for the thing it's doing right now. When it's researching
 
 Anthropic ran 30 coding agents on the same task. Eighteen independently created a git branch with the exact same name. They never spoke to each other. Same model, same fine-tuning, same reach for the same pattern when nobody tells them otherwise. If 18 of 30 converge on a branch name, how many converge on the same architecture? The same test strategy? The same misreading of a requirement?
 
+The task↔model matrix exists because this convergence is a property of model families, not individuals. Pin a different family to the review step and the convergence breaks.
+
 The fix isn't a better prompt. The fix is structural. The agent that designs is never the agent that reviews. Different session, different context, often a different model family. The reviewer sees the output cold. Conformity isn't something you prompt away. It's a property of the system.
 
 ## The Three Profiles
@@ -36,6 +38,14 @@ The research profile investigates. It gets the spec, not the conversation that p
 The build agent ships. It gets the research findings, not the research process. It builds from the output, not from the reasoning. It ships code, writes tests, deploys. When it's done, it reports back through a structured handoff.
 
 Three profiles. Three models. Three sets of skills. Zero shared state.
+
+## The Model Posture
+
+Models aren't picked ad-hoc. Each profile references a task↔model matrix that pins a specific model to each task type — from spec authoring to code review to critical GO/NO-GO gates. The matrix is a living reference, reviewed and updated weekly by automated scans that surface value-for-money shifts. A pin moves only when a probe validates the replacement on real work.
+
+The matrix enforces one rule that matters most: **producer ≠ verifier.** The model that writes code is never the model that reviews it. Different model families have different blind spots. When the producer and verifier come from the same family, they share the same blind spot — and the same bug passes both gates. The matrix pins the reviewer for consistency of blind spots, not raw intelligence.
+
+This means model variability exists at two levels: between profiles (orchestrator, research, and build each run different model families) and within profiles (a single profile routes different models to different task types based on the matrix).
 
 ## What the Handoffs Look Like
 
@@ -95,4 +105,4 @@ Governing autonomous agents is an architecture problem, not a tooling problem. T
 
 The boundaries matter more than the agents. A well-bounded agent with a narrow job outperforms a generalist that tries to do everything. And structured handoffs are more reliable than any API call, because they force every interaction to be intentional.
 
-Three profiles. Three models. Zero shared state. That's the delegation flow.
+Three Hermes profiles. Multiple sub-agents each. A task↔model matrix that updates itself. Producer never equals verifier. Zero shared state. That's the delegation flow.
