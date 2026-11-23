@@ -1,9 +1,9 @@
 ---
-title: "Regulatory Radar — November 23, 2026"
-description: "Three Canadian deadlines: E-23 model risk guidelines (132 days), RTR fraud services live, OSFI crypto-asset rules effective Nov 1."
+title: "Canada Opens Operational Open Banking as Hong Kong Proposes the First Agentic AI Kill Switch"
+description: "Canada designates FDX and OBSI for consumer-driven banking. OSFI amends B-10. Payments Canada raises penalties to $1M. Hong Kong proposes a kill switch for AI agents."
 date: 2026-11-23
-domain: regulatory
-tags: [radar, regulatory]
+domain: banking
+tags: [radar, banking, regulation, ai-agents, open-banking]
 sources:
   - https://www.osfi-bsif.gc.ca/en/guidance/guidance-library/guideline-e-23-model-risk-management-2027
   - https://www.payments.ca/modernizing-canadas-payment-infrastructure-and-safeguarding-economy-through-education-collaboration
