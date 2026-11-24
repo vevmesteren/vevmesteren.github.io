@@ -139,7 +139,7 @@ This is also where the documentation stage connects to the broader knowledge arc
 
 Before the AI touches code, the work unit carries a specification.
 
-A structured spec that lives inside the issue tracker itself, not in a separate tool, not in a specs/ folder that drifts from the code. The issue tracker is the container. The knowledge base is where the spec lives after delivery. There is no third place.
+A structured spec that lives inside the issue tracker itself, not in a separate tool, not in a specs/ folder that drifts from the code. The issue tracker is the container. The [knowledge base](/blog/knowledge-architecture-autonomous-agents/) is where the spec lives after delivery. There is no third place.
 
 The specification follows conventions adapted from [OpenSpec](https://openspec.dev/):
 
@@ -155,7 +155,7 @@ The specification follows conventions adapted from [OpenSpec](https://openspec.d
 
 The spec is the only thing that travels from the conversation that defined the work to the session that executes it. If it's vague, the output is vague. If it's precise, the output has a fighting chance.
 
-This connects back to the knowledge architecture: specs aren't just delivery artifacts, they're the knowledge base's input format. The structure that makes specs machine-readable for execution also makes them machine-indexable for retrieval.
+This connects back to the [knowledge architecture](/blog/knowledge-architecture-autonomous-agents/): specs aren't just delivery artifacts, they're the knowledge base's input format. The structure that makes specs machine-readable for execution also makes them machine-indexable for retrieval.
 
 ---
 
@@ -204,7 +204,7 @@ The trust boundaries matter:
 - **Human Authority Boundary**: Gate decisions require human approval. The system prepares evidence; humans decide.
 - **Orchestration Layer**: Automated but transparent. The orchestrator dispatches work and collects results but doesn't make GO/NO-GO calls.
 - **Execution Layer**: Workers are isolated from each other. Producer and verifier sessions never share context.
-- **Knowledge Layer**: Receives artifacts from all layers. The knowledge base is downstream of execution, not upstream. It doesn't drive execution; it records what execution produced.
+- **Knowledge Layer**: Receives artifacts from all layers. The [knowledge base](/blog/knowledge-architecture-autonomous-agents/) is downstream of execution, not upstream. It doesn't drive execution; it records what execution produced.
 
 ---
 
